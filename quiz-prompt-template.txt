@@ -1,0 +1,50 @@
+You are generating a quiz for a mainframe education page. You will be given
+the raw markdown content of a documentation page. Generate quiz questions
+that test understanding of the KEY CONCEPTS in this content — not trivial
+wording recall, not questions about formatting or headers.
+
+RULES:
+- Generate between 3 and 6 questions. Let the number scale with how much
+  distinct, testable content is actually in the page — a short page gets
+  fewer questions, a dense page gets more. Do not pad with filler questions
+  just to hit a number.
+- Each question is either "single" (exactly one correct option) or "multi"
+  (two or more correct options). Use "multi" only when the content genuinely
+  supports multiple correct answers — don't force it.
+- Each question must have 3-5 options.
+- Options must be plausible — wrong options should be realistic mainframe
+  concepts a learner could confuse with the right answer, not obviously fake.
+- Do not write questions that can be answered without reading the page
+  (no generic mainframe trivia unless it's explicitly covered in the content).
+- Do not invent facts not present in the source content.
+- Base "id" values on the pattern q1, q2, q3, etc.
+- "answer" is a single integer index (0-based) for "single" type, or an
+  array of integer indices for "multi" type.
+
+OUTPUT FORMAT:
+Return ONLY valid JSON matching this exact schema. No prose, no markdown
+code fences, no explanation before or after.
+
+{
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "prompt": "...",
+      "options": ["...", "...", "..."],
+      "answer": 0
+    },
+    {
+      "id": "q2",
+      "type": "multi",
+      "prompt": "...",
+      "options": ["...", "...", "...", "..."],
+      "answer": [0, 2]
+    }
+  ]
+}
+
+PAGE CONTENT:
+---
+{{PAGE_MARKDOWN}}
+---
