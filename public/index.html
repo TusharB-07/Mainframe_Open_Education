@@ -1,29 +1,118 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mainframe Open Education</title>
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+  <div id="splash">
+    <div class="splash-bg"></div>
+    <div class="splash-scene">
+      <img class="splash-float" src="/logo/element1.png" style="top:8%;left:4%;width:clamp(70px,8vw,130px);animation-delay:0s" alt="">
+      <img class="splash-float" src="/logo/element2.png" style="top:5%;right:5%;width:clamp(65px,7vw,120px);animation-delay:0.7s" alt="">
+      <img class="splash-float" src="/logo/element3.png" style="top:28%;left:2%;width:clamp(55px,6.5vw,110px);animation-delay:1.4s" alt="">
+      <img class="splash-float" src="/logo/element4.png" style="top:24%;right:2%;width:clamp(60px,7vw,115px);animation-delay:2.1s" alt="">
+      <img class="splash-float" src="/logo/element5.png" style="bottom:26%;left:3%;width:clamp(55px,6.5vw,105px);animation-delay:0.3s" alt="">
+      <img class="splash-float" src="/logo/element6.png" style="bottom:22%;right:3%;width:clamp(50px,6vw,100px);animation-delay:1.1s" alt="">
+      <img class="splash-float" src="/logo/element7.png" style="bottom:6%;left:6%;width:clamp(50px,6vw,95px);animation-delay:2.8s" alt="">
+      <img class="splash-float" src="/logo/element8.png" style="bottom:5%;right:6%;width:clamp(65px,8vw,125px);animation-delay:3.5s" alt="">
+    </div>
+    <div class="splash-center">
+      <div class="splash-logo-wrap">
+        <img class="splash-main-logo" src="/logo/moe%20log.png" alt="Mainframe Open Education">
+      </div>
+      <p class="splash-message">click anywhere to start</p>
+    </div>
   <header id="top-header">
     <div class="header-left">
-      <button id="sidebar-toggle">&#9776;</button>
-      <a class="header-logo" href="/"><span class="header-title">MOE Documentation</span></a>
+      <button id="sidebar-toggle" title="Toggle sidebar">&#9776;</button>
+      <a class="header-logo" href="/">
+        <span class="header-title">MOE Documentation</span>
+      </a>
     </div>
     <div class="header-center">
       <div class="header-search">
-        <input type="text" id="search-input" placeholder="Search documentation...">
+        <input type="text" id="search-input" placeholder="Search documentation..." />
         <span class="search-hint">&#8984;K</span>
       </div>
     </div>
-    <div class="header-right"></div>
+    <div class="header-right">
+      <div id="progress-container">
+        <span id="progress-text">Progress: 0/0</span>
+        <div class="progress-bar">
+          <div id="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div class="font-size-controls" title="Adjust code font size">
+        <button id="font-dec" class="header-btn font-btn">A-</button>
+        <span id="font-size-label" class="font-size-label">16px</span>
+        <button id="font-inc" class="header-btn font-btn">A+</button>
+      </div>
+      <a href="/certification" class="header-btn" style="text-decoration:none" title="Certification Exam">Certificate</a>
+      <button id="sandbox-btn" class="header-btn" title="COBOL Sandbox">Sandbox</button>
+      <button id="dark-toggle" class="header-btn dark-toggle" title="Toggle dark mode">&#9790;</button>
+    </div>
   </header>
   <div id="app">
-    <aside id="sidebar"><nav id="nav-tree"></nav></aside>
-    <div id="content-area"><div id="page-content"></div></div>
+    <aside id="sidebar">
+      <nav id="nav-tree"></nav>
+    </aside>
+
+    <div id="content-area">
+      <div class="content-floats">
+        <img class="c-float" src="/logo/element1.png" style="top:4%;left:-2%;width:clamp(60px,7vw,110px);animation-delay:0s;opacity:0.04" alt="">
+        <img class="c-float" src="/logo/element3.png" style="top:12%;right:-3%;width:clamp(50px,6vw,90px);animation-delay:5s;opacity:0.03" alt="">
+        <img class="c-float" src="/logo/element5.png" style="bottom:8%;left:0%;width:clamp(55px,6.5vw,100px);animation-delay:10s;opacity:0.035" alt="">
+        <img class="c-float" src="/logo/element7.png" style="bottom:20%;right:-2%;width:clamp(45px,5vw,80px);animation-delay:15s;opacity:0.03" alt="">
+      </div>
+       PROCEDURE DIVISION.
+           DISPLAY "Hello from COBOL".
+           STOP RUN.</textarea>
+        </div>
+        <div id="sandbox-output" class="sandbox-output"></div>
+      </div>
+      <div id="page-content">
+        <div class="welcome">
+
+          <p class="welcome-intro">
+            Welcome to Mainframe Open Education (MOE), proudly sponsored by the Open Mainframe Project (OMP). We're thrilled to have you join our vibrant community, where our partnership is dedicated to open-sourcing mainframe learning roadmaps and facilitating knowledge transfer.
+          </p>
+          <p class="welcome-intro">
+            We aim to create an inclusive space where everyone, including hiring managers, can easily access plans and collaborate on developing valuable assets. The wealth of information within our community spans minds and archives across various organizations, ensuring a rich and welcoming environment for all.
+          </p>
+
+          <div class="welcome-cards">
+            <a class="welcome-card" href="https://open-mainframe-project.gitbook.io/mainframe-open-education-project/introduction-what-is-enterprise-computing.md">
+              <span class="card-image" style="background-image: url('https://images.unsplash.com/photo-1488229297570-58520851e868?w=400&h=200&fit=crop')"></span>
+              <span class="card-label">INTRODUCTION</span>
+              <span class="card-title">What is Enterprise Computing?</span>
+            </a>
+            <a class="welcome-card" href="https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today.md">
+              <span class="card-image" style="background-image: url('https://images.unsplash.com/photo-1644088379091-d574269d422f?w=400&h=200&fit=crop')"></span>
+              <span class="card-label">CHAPTER 1</span>
+              <span class="card-title">What is a Mainframe Today?</span>
+            </a>
+            <a class="welcome-card" href="https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology.md">
+              <span class="card-image" style="background-image: url('https://images.unsplash.com/photo-1563641749712-028dfeab14b3?w=400&h=200&fit=crop')"></span>
+              <span class="card-label">CHAPTER 2</span>
+              <span class="card-title">Foundational Technology</span>
+            </a>
+            <a class="welcome-card" href="https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-3-roles-in-mainframe.md">
+              <span class="card-image" style="background-image: url('https://images.unsplash.com/photo-1622037022824-0c71d511ef3c?w=400&h=200&fit=crop')"></span>
+              <span class="card-label">CHAPTER 3</span>
+              <span class="card-title">Roles in Mainframe</span>
+            </a>
+            <a class="welcome-card" href="https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-4-deeper-dive-in-role-chosen.md">
+              <span class="card-image" style="background-image: url('https://images.unsplash.com/photo-1660428580087-cdb3cef4fc54?w=400&h=200&fit=crop')"></span>
+              <span class="card-label">CHAPTER 4</span>
+              <span class="card-title">Deeper Dive in Role Chosen</span>
+            </a>
+            <a class="welcome-card" href="https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-5-career-paths-and-opportunities.md">
+              <span class="card-image" style="background-image: url('https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=400&h=200&fit=crop')"></span>
+              <span class="card-label">CHAPTER 5</span>
+              <span class="card-title">Career Path Opportunities</span>
+            </a>
+          </div>
+
+          <div class="welcome-cta">
+            <div class="cta-content">
+              <div class="cta-badge">JOIN US</div>
+      </div>
+    </div>
   </div>
-  <script src="js/app.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>

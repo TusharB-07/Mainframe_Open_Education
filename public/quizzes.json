@@ -1,0 +1,1829 @@
+{
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/introduction-what-is-enterprise-computing.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What defines enterprise computing?",
+        "options": [
+          "Computing systems designed for small businesses with fewer than 50 employees",
+          "Large-scale computing systems that handle critical business operations for organizations",
+          "Personal computing devices used by enterprise employees",
+          "Cloud-based software for enterprise social media management"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which of the following are key characteristics of enterprise computing?",
+        "options": [
+          "High availability and reliability",
+          "Single-user access only",
+          "Scalability to handle growing workloads",
+          "Strong security and data integrity"
+        ],
+        "answer": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What is a mainframe's primary role in enterprise computing?",
+        "options": [
+          "Running desktop applications for individual users",
+          "Processing large volumes of transactions with high reliability and security",
+          "Replacing all other servers in the data center",
+          "Providing free open-source software to enterprises"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/role-of-the-mainframe-today.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multi",
+        "prompt": "In which industries are mainframes still heavily used today?",
+        "options": [
+          "Banking and finance",
+          "Insurance",
+          "Retail food trucks",
+          "Government and healthcare"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What percentage of Fortune 500 companies still use mainframes?",
+        "options": [
+          "Approximately 25%",
+          "Approximately 50%",
+          "Over 70%",
+          "Less than 10%"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "Why do organizations continue to rely on mainframes rather than migrating entirely to the cloud?",
+        "options": [
+          "Mainframes are cheaper to purchase than cloud services",
+          "Mainframes provide superior transaction processing, security, and reliability for mission-critical workloads",
+          "Cloud providers do not offer mainframe-compatible services",
+          "Mainframes require less specialized skills to operate than cloud platforms"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/role-of-the-mainframe-today/mainframe-and-the-cloud.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "How does the page describe the relationship between mainframes and the cloud?",
+        "options": [
+          "The cloud has completely replaced mainframes in modern data centers",
+          "Mainframes and the cloud are converging to reshape data processing and management",
+          "Mainframes and cloud are incompatible technologies that cannot work together",
+          "The cloud is a subset of mainframe technology"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does each technology (mainframe and cloud) represent according to the page?",
+        "options": [
+          "Competing business models from the same vendor",
+          "A distinct era in the evolution of computing infrastructure",
+          "Identical approaches to data storage and processing",
+          "Legacy and modern versions of the same operating system"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/role-of-the-mainframe-today/enterprise-computing.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What does enterprise computing refer to?",
+        "options": [
+          "Computing done by a single employee on their workstation",
+          "The use of computer systems and software within a large organization to handle business processes",
+          "Cloud computing services offered to small businesses",
+          "Personal computing devices used at home"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which of the following are aspects of enterprise computing?",
+        "options": [
+          "Data storage and processing",
+          "Communication and collaboration",
+          "Personal entertainment applications",
+          "Deployment and management of extensive IT infrastructure"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What serves as the backbone for connecting different departments in enterprise computing?",
+        "options": [
+          "A single high-performance desktop computer",
+          "A robust and scalable network infrastructure",
+          "A collection of individual printers",
+          "A shared social media account"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/role-of-the-mainframe-today/hybrid-cloud.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What does a hybrid cloud architecture combine?",
+        "options": [
+          "Two different public cloud providers only",
+          "The resilience of mainframe systems with the dynamic possibilities of cloud computing",
+          "Desktop and mobile applications",
+          "On-premise servers and personal laptops"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What is the primary benefit of hybrid cloud architectures for enterprises?",
+        "options": [
+          "Reducing all IT costs to zero",
+          "Empowering enterprises with efficiency and innovation by bridging traditional and contemporary computing",
+          "Eliminating all security requirements",
+          "Replacing all legacy systems overnight"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/who-uses-the-mainframe-and-why.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "How do most people interact with mainframes in their daily lives?",
+        "options": [
+          "By directly logging into mainframe terminals at home",
+          "As end users of financial, retail, and data management transactions processed by mainframes",
+          "By purchasing mainframe hardware for personal use",
+          "By writing mainframe application code"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which types of transactions commonly involve mainframes?",
+        "options": [
+          "Banking and financial transactions",
+          "Airline reservations",
+          "Personal text messaging between individuals",
+          "Retail and data management transactions"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "Why is mainframe reliability critical in competitive markets?",
+        "options": [
+          "Mainframe downtime is a minor inconvenience easily ignored",
+          "An unavailable transaction could cause a client to permanently switch to a competitor",
+          "Mainframes are only used for non-critical batch processing",
+          "Competitors do not use mainframes at all"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/mainframe-basic-architecture-and-components.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "How many encrypted transactions per day can the IBM Z encryption engine execute?",
+        "options": [
+          "More than 1 billion",
+          "More than 12 billion",
+          "More than 100 million",
+          "More than 500 billion"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "What operating systems are supported by the Z-Series chip?",
+        "options": [
+          "z/VM",
+          "Windows Server",
+          "z/OS",
+          "z/VSE and Linux"
+        ],
+        "answer": [
+          0,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "According to the page, how must the term 'mainframe' be understood today?",
+        "options": [
+          "Only as the physical hardware (Z-Series chip)",
+          "Divided into two meanings: the hardware (Z-Series chip) and the operating systems supported by it",
+          "Only as the software and operating systems",
+          "As a cloud-based service offering"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "multi",
+        "prompt": "Which components are included in mainframe hardware?",
+        "options": [
+          "Outboard I/O and encryption CPUs",
+          "Hyperchannels and redundant power supplies",
+          "Standard office printers",
+          "Resilience features"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/how-the-mainframe-works.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What operating systems can IBM mainframes run?",
+        "options": [
+          "Only proprietary IBM operating systems",
+          "Linux and IBM z/OS among others",
+          "Only Windows Server",
+          "Only open-source operating systems"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What aspect of mainframe architecture makes them suitable for applications requiring high transaction security?",
+        "options": [
+          "Distributed storage across multiple unrelated servers",
+          "Shared memory architecture enabling efficient information sharing among parallel transactions",
+          "Single-threaded processing for security isolation",
+          "Lack of network connectivity"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What unique aspect of IBM mainframes has been maintained since the S/360 generation?",
+        "options": [
+          "The same physical size and weight",
+          "Full backward compatibility despite evolution in appearance",
+          "The exact same processor speed",
+          "Identical operating system interface"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "What makes mainframes resilient according to the page?",
+        "options": [
+          "Their reliance on a single power source",
+          "Layers of redundancy",
+          "Their small physical footprint",
+          "Their lack of moving parts"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/mainframe-versus-server.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "According to the page, how does investing in mainframe modernization compare to migrating workloads?",
+        "options": [
+          "Modernization on the mainframe is much more cost-effective than complete modernization outside the mainframe",
+          "Migrating off the mainframe is always cheaper",
+          "Mainframe modernization is no longer available",
+          "Modernization costs are identical regardless of platform"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "How much more could moving mainframe workloads to the cloud cost in total cost of ownership?",
+        "options": [
+          "2x more",
+          "5.21x more",
+          "10x more",
+          "The same cost"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What correlation exists for top-performing organizations regarding mainframe investment?",
+        "options": [
+          "There is no correlation between mainframe investment and performance",
+          "A direct positive correlation between mainframe investment and overall performance",
+          "Organizations that invest less in mainframes perform better",
+          "Mainframe investment only benefits small companies"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/mainframe-security-myths.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the most accurate statement about mainframe z/OS security?",
+        "options": [
+          "The mainframe is inherently secure with no additional effort needed",
+          "The mainframe is the most secure platform only when appropriately managed",
+          "The mainframe is less secure than distributed systems by default",
+          "Security on the mainframe cannot be configured or customized"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What is one common myth about mainframe security?",
+        "options": [
+          "Mainframes cannot be hacked under any circumstances",
+          "Mainframe data stays isolated and is not accessible from other systems",
+          "Mainframe security requires no passwords",
+          "Mainframes do not support encryption"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What risk does increased mainframe integration and connectivity create?",
+        "options": [
+          "It eliminates all security threats automatically",
+          "It challenges the assumption of complete security, potentially leading to organizational complacency and increased risk",
+          "It makes the mainframe slower",
+          "It reduces the need for security personnel"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/mainframe-evolution.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multi",
+        "prompt": "Which trends are shaping the future of mainframes according to the page?",
+        "options": [
+          "Virtualization",
+          "Cloud computing and Big Data",
+          "Social media marketing",
+          "Security"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "When did the mainframe legacy begin?",
+        "options": [
+          "The 1970s",
+          "The 1950s",
+          "The 1990s",
+          "The 2000s"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What makes the mainframe well-suited for Big Data workloads?",
+        "options": [
+          "Its small storage capacity",
+          "Its ability to process and analyze massive amounts of data",
+          "Its inability to handle multiple tasks simultaneously",
+          "Its lack of security features"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "Why are mainframes ideal for protecting sensitive data?",
+        "options": [
+          "They have minimal security features",
+          "They are known for their security features",
+          "They are not connected to any network",
+          "They use outdated encryption methods"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/mainframe-evolution/looking-back-the-first-50-years-of-mainframe.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "Which IBM system emerged in the 1960s as the harbinger of modern mainframes?",
+        "options": [
+          "IBM System/370",
+          "IBM 360",
+          "IBM AS/400",
+          "IBM PC"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What major impact did mainframes have in the 1970s?",
+        "options": [
+          "They introduced personal computing",
+          "They enabled real-time transaction processing for credit card authorizations and airline reservations",
+          "They were primarily used for video gaming",
+          "They replaced all distributed computing systems"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What promise did IBM make in 1964 regarding mainframe compatibility?",
+        "options": [
+          "That mainframes would be free by 1970",
+          "That whatever you wrote for their mainframe would continue to run into the future",
+          "That mainframes would double in speed every year",
+          "That all mainframes would be replaced by PCs"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "multi",
+        "prompt": "What challenges did mainframes face and overcome during the 1980s and 1990s?",
+        "options": [
+          "The rise of distributed computing",
+          "The end of all mainframe production",
+          "The need to adapt to changing technology landscapes",
+          "Complete market irrelevance"
+        ],
+        "answer": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/mainframe-modernization.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multi",
+        "prompt": "According to Allen Zander's framework, which are facets of mainframe modernization?",
+        "options": [
+          "Cost modernization and professional skills",
+          "Interface modernization and progressive modernization",
+          "Personal device modernization",
+          "Code modernization and performance modernization"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "How many key facets of mainframe modernization did Allen Zander outline?",
+        "options": [
+          "Five",
+          "Seven",
+          "Ten",
+          "Three"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today/modern-mainframe/zowe.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is Zowe?",
+        "options": [
+          "A proprietary IBM mainframe operating system",
+          "An integrated and extensible open source framework for z/OS",
+          "A cloud storage service for mainframe data",
+          "A replacement for JCL"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What kind of interfaces does Zowe offer for interacting with z/OS?",
+        "options": [
+          "Only command-line interfaces",
+          "Modern interfaces similar to what you may experience on cloud platforms",
+          "Only legacy 3270 terminal interfaces",
+          "No interfaces; it is a backend-only framework"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multi",
+        "prompt": "What can users do with Zowe according to the page?",
+        "options": [
+          "Setup and use the framework",
+          "Extend the framework with plug-ins and extensions",
+          "Replace the z/OS operating system entirely",
+          "Troubleshoot and contribute to the project"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/enterprise-storage-101.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multi",
+        "prompt": "Which storage architectures are used in enterprise systems according to the page?",
+        "options": [
+          "Direct access storage (DASD)",
+          "Network-attached storage (NAS)",
+          "USB flash drives",
+          "Storage area networks (SAN) and object storage"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What historical concepts do mainframes preserve due to backward compatibility?",
+        "options": [
+          "Floppy disk drives",
+          "Tracks and cylinders with ECKD formatting",
+          "Magnetic tape only storage",
+          "Cloud-native object storage only"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What trade-off does enterprise storage management involve according to the webcast?",
+        "options": [
+          "Speed versus cost of hardware only",
+          "Speed versus protection in data strategies",
+          "Storage capacity versus physical size",
+          "Cloud versus on-premise exclusively"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/tso-e-ispf-and-unix-system-services-uss-interactive-facilities-of-z-os.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What terminal emulator is used to connect to TSO/E on z/OS?",
+        "options": [
+          "SSH client",
+          "TN3270",
+          "RDP client",
+          "Telnet standard"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What is the first interface you access after connecting to a mainframe via TN3270?",
+        "options": [
+          "ISPF directly",
+          "TSO/E (Time Sharing Option/Extensions)",
+          "UNIX System Services",
+          "IMS"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What is ISPF and what does it provide?",
+        "options": [
+          "A programming language for mainframe applications",
+          "A menu-driven interface for navigating and managing z/OS components",
+          "A database management system",
+          "A network monitoring tool"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "multi",
+        "prompt": "What can you do through ISPF panels?",
+        "options": [
+          "Edit code and submit jobs",
+          "Manage datasets",
+          "Browse social media",
+          "Monitor system activities"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/understanding-the-jcl-job-control-language.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is Job Control Language (JCL) used for?",
+        "options": [
+          "Writing business application logic in COBOL",
+          "Communicating instructions to IBM mainframe systems to execute tasks",
+          "Creating graphical user interfaces",
+          "Managing network configurations"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What are the three main sections of every JCL script?",
+        "options": [
+          "JOB Statement, EXEC Statement, and DD Statement",
+          "INPUT, PROCESS, and OUTPUT",
+          "START, RUN, and END",
+          "DEFINE, ALLOCATE, and EXECUTE"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What is the role of an EXEC statement in JCL?",
+        "options": [
+          "It defines the datasets used in the job",
+          "It specifies the program or procedure to execute for a job step",
+          "It provides accounting information for the job",
+          "It sends notifications to the system operator"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "How does JCL differ from general-purpose programming languages?",
+        "options": [
+          "JCL is used for defining jobs with sequences of steps, not for business logic",
+          "JCL is identical to COBOL in syntax and purpose",
+          "JCL is used for web development",
+          "JCL can perform complex mathematical calculations on its own"
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/understanding-the-jcl-job-control-language/understanding-the-job-statement.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "Where does the JOB statement appear in a JCL script?",
+        "options": [
+          "After every EXEC statement",
+          "Always as the first line in a JCL script",
+          "At the end of the JCL script",
+          "Only in cataloged procedures, not in the main JCL"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which parameters can be specified in a JOB statement?",
+        "options": [
+          "CLASS (determines priority and resource allocation)",
+          "MSGCLASS (specifies where system logs are sent)",
+          "DSN (dataset name)",
+          "NOTIFY (sends message to submitter upon completion)"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What does the CLASS parameter in a JOB statement do?",
+        "options": [
+          "Specifies the programming language to use",
+          "Determines the priority and resource allocation for the job",
+          "Defines the dataset class for output",
+          "Sets the security classification of the job"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "What is the purpose of the MSGCLASS parameter?",
+        "options": [
+          "It defines the message format for COBOL programs",
+          "It specifies where system output and log messages are sent",
+          "It sets the debug level for the job",
+          "It determines the number of messages allowed"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/understanding-the-jcl-job-control-language/understanding-the-exec-statement.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the primary role of the EXEC statement in JCL?",
+        "options": [
+          "To define datasets used by the job",
+          "To specify the program or procedure that a step will execute",
+          "To provide accounting information",
+          "To end the job"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does PGM= specify in an EXEC statement?",
+        "options": [
+          "The priority of the program",
+          "The name of the program or utility to execute",
+          "The programming language used",
+          "The page number of the manual"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "How many steps can a single JCL job include?",
+        "options": [
+          "Up to 99 steps",
+          "Up to 255 steps",
+          "Up to 1000 steps",
+          "Unlimited steps"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/understanding-the-jcl-job-control-language/understanding-the-dd-statement.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the purpose of the DD (Data Definition) statement in JCL?",
+        "options": [
+          "To define the job name and accounting information",
+          "To define the datasets used in the job and link the program to its resources",
+          "To specify the program to execute",
+          "To set conditional execution parameters"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does the DISP parameter in a DD statement control?",
+        "options": [
+          "The display format of the output",
+          "How the dataset is handled (created, shared, or deleted)",
+          "The disposition of the job in the queue",
+          "The display mode for error messages"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multi",
+        "prompt": "Which DISP parameter values are valid for dataset disposition?",
+        "options": [
+          "SHR (shared access to existing dataset)",
+          "NEW (creates a new dataset)",
+          "DEL (deletes the program)",
+          "MOD (appends records without overwriting)"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "What does DISP=OLD indicate?",
+        "options": [
+          "The dataset is a backup copy",
+          "The dataset already exists and no other job can access it until the current job step completes",
+          "The dataset is archived and no longer accessible",
+          "The dataset is a temporary work file"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/understanding-the-jcl-job-control-language/creating-a-physical-sequential-ps.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What utility is commonly used in JCL to allocate or delete datasets without doing any processing?",
+        "options": [
+          "IEBGENER",
+          "IEFBR14",
+          "IEBCOPY",
+          "IDCAMS"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does SPACE=(CYL,(1,1),RLSE) do in a DD statement?",
+        "options": [
+          "Allocates 1 cylinder initially with 1 additional and releases unused space",
+          "Specifies the space is on cylinder 1 of the disk",
+          "Sets the space to 1% of available storage",
+          "Creates 1 megabyte of space with no release option"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "In the DCB parameter, what does RECFM=FB specify?",
+        "options": [
+          "The file is in free-block format",
+          "Fixed-length records with a specified record length and block size",
+          "The file is in variable-block format",
+          "The record format is undecided"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "What does DISP=(NEW,CATLG,DELETE) mean?",
+        "options": [
+          "Create and catalog if successful, delete if the job fails",
+          "Delete the dataset immediately regardless of outcome",
+          "Create without cataloging, keep on failure",
+          "Catalog an existing dataset"
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/understanding-the-jcl-job-control-language/understanding-libraries-in-jcl.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the purpose of JOBLIB in JCL?",
+        "options": [
+          "To define the output library for job results",
+          "To specify the library where the system should search for programs used in all steps of the job",
+          "To store the JCL source code",
+          "To define the system log location"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does STEPLIB do that differs from JOBLIB?",
+        "options": [
+          "STEPLIB applies only to a specific step, while JOBLIB applies to all steps",
+          "STEPLIB is used for datasets, not programs",
+          "JOBLIB is used for procedures only",
+          "There is no difference; they are interchangeable"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What standard system program library does z/OS search automatically for IBM-supplied programs?",
+        "options": [
+          "SYS1.LINKLIB",
+          "SYS1.PARMLIB",
+          "SYS1.PROCLIB",
+          "SYS1.MACLIB"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "When would you need to specify JOBLIB or STEPLIB in your JCL?",
+        "options": [
+          "When running built-in IBM utilities",
+          "When the program resides in a private program library",
+          "When submitting a job from TSO",
+          "When using the MSGCLASS parameter"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/understanding-the-jcl-job-control-language/understanding-instream-procedures-cataloged-procedures-and-symbolic-parameters-in-jcl.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What defines the start and end of an instream procedure in JCL?",
+        "options": [
+          "PROC statement marks the start and PEND marks the end",
+          "BEGIN marks the start and END marks the end",
+          "START marks the start and STOP marks the end",
+          "// marks the start and // marks the end"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What is the key difference between an instream procedure and a cataloged procedure?",
+        "options": [
+          "Instream procedures run faster than cataloged procedures",
+          "Instream procedures are written directly in the same JCL member where executed; cataloged procedures are stored in a separate dataset",
+          "Cataloged procedures cannot use symbolic parameters",
+          "Instream procedures can only be used by system programmers"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What statements can be included inside an instream procedure?",
+        "options": [
+          "Only DD and EXEC statements",
+          "CNTL, COMMENT, DD, EXEC, IF/THEN/ELSE/ENDIF, INCLUDE, and SET",
+          "Only JOB and DD statements",
+          "Only JCL conditional statements"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "What is the scope of an instream procedure?",
+        "options": [
+          "It can be used by any job in the system",
+          "It is limited to the job in which it is defined",
+          "It can be used across all jobs submitted by the same user",
+          "It is stored in the system procedure library permanently"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/what-is-a-conditional-statement-in-jcl.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the purpose of conditional statements in JCL?",
+        "options": [
+          "To define dataset attributes",
+          "To let a job decide which steps to run based on previous step results",
+          "To specify the programming language used in the job",
+          "To format the output of a program"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does the IF/THEN/ELSE/ENDIF construct in JCL check?",
+        "options": [
+          "The availability of disk space",
+          "The return code (RC) of previous steps",
+          "The current time of day",
+          "The username of the job submitter"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multi",
+        "prompt": "In which scenarios are conditional statements in JCL commonly used?",
+        "options": [
+          "Error handling and skipping steps if a previous step failed",
+          "Branching logic based on previous results",
+          "Replacing the JOB statement",
+          "Making jobs more flexible without running everything every time"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/what-is-a-conditional-statement-in-jcl/jcl-conditional-parameter-types.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What does COND=(0,EQ) tell JCL to do?",
+        "options": [
+          "Run the step only if the previous step's return code was zero",
+          "Skip the step if the previous step's return code was zero (no errors)",
+          "Execute the step regardless of any return code",
+          "Abort the job if the return code is zero"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does COND=EVEN do in JCL?",
+        "options": [
+          "Runs the step only if all previous steps had a return code of zero",
+          "Runs the step even if something above failed or abended",
+          "Skips the step if the previous step completed normally",
+          "Terminates the job if any step ends with a non-zero code"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "In the example COND=(0,EQ), what does EQ stand for?",
+        "options": [
+          "Equal to the specified return code",
+          "End of queue",
+          "Error quotient",
+          "Execute quietly"
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/utilities/iebcompr.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the IEBCOMPR utility used for?",
+        "options": [
+          "Copying datasets from one volume to another",
+          "Comparing PS, PDS, or PDSE datasets",
+          "Compressing partitioned datasets to remove unused space",
+          "Creating generation data groups"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "When are two PS datasets considered equal by IEBCOMPR?",
+        "options": [
+          "When they have the same name",
+          "When they contain the same number of records and corresponding records are identical",
+          "When they were created on the same date",
+          "When they occupy the same amount of disk space"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What return code does IEBCOMPR produce when files are not identical?",
+        "options": [
+          "Return code 0",
+          "Return code 4",
+          "Return code 8",
+          "Return code 16"
+        ],
+        "answer": 2
+      },
+      {
+        "id": "q4",
+        "type": "multi",
+        "prompt": "What are common use cases for IEBCOMPR?",
+        "options": [
+          "Verifying backups were done correctly",
+          "Comparing PDS/PDSE members for identical content",
+          "Creating new datasets",
+          "Checking data integrity after migration"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/utilities/iebgener.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is IEBGENER primarily used for?",
+        "options": [
+          "Comparing datasets for differences",
+          "Copying records from sequential datasets or converting between PS and PDS formats",
+          "Compressing partitioned datasets",
+          "Defining GDG bases"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which dataset types can IEBGENER use as input?",
+        "options": [
+          "Physical Sequential (PS) datasets",
+          "Partitioned Dataset (PDS) members",
+          "VSAM datasets",
+          "Partitioned Dataset Extended (PDSE) members"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What DD names does IEBGENER use for input and output datasets?",
+        "options": [
+          "SYSUT1 for input and SYSUT2 for output",
+          "INPUT for input and OUTPUT for output",
+          "SYSIN for input and SYSOUT for output",
+          "INDD for input and OUTDD for output"
+        ],
+        "answer": 0
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/utilities/iebcopy.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is IEBCOPY used for?",
+        "options": [
+          "Comparing sequential datasets",
+          "Copying, merging, and compressing Partitioned Datasets (PDS) or PDSE",
+          "Generating reports from job output",
+          "Defining GDG base entries"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "What operations can IEBCOPY perform?",
+        "options": [
+          "Copy an entire PDS/PDSE",
+          "Copy selected members from a PDS/PDSE",
+          "Compare records between sequential files",
+          "Compress a PDS by removing unused space"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What DD names does IEBCOPY use for input and output?",
+        "options": [
+          "SYSUT1 and SYSUT2",
+          "INDD and OUTDD (via SYSIN control statements)",
+          "INPUT and OUTPUT",
+          "SOURCE and TARGET"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/gdg/gdg-parameters.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What utility is used to define a GDG base?",
+        "options": [
+          "IEFBR14",
+          "IDCAMS",
+          "IEBGENER",
+          "IEBCOPY"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What is the maximum LIMIT value for a GDG?",
+        "options": [
+          "99",
+          "255",
+          "1000",
+          "Unlimited"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What happens when EMPTY is specified on a GDG definition and the generation limit is reached?",
+        "options": [
+          "Only the oldest generation is deleted",
+          "All existing generations are deleted at once when a new generation is added",
+          "The job terminates with an error",
+          "The newest generation is deleted to make room"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q4",
+        "type": "single",
+        "prompt": "What does SCRATCH specify in GDG parameters?",
+        "options": [
+          "Generations are kept indefinitely",
+          "Generations are physically removed from disk when uncataloged",
+          "Only the catalog entry is removed, data stays on disk",
+          "Generations are backed up to tape automatically"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/gdg/gdg-base.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is a GDG base?",
+        "options": [
+          "A physical dataset that stores all generation data",
+          "A catalog entry that defines the common name for all generation datasets",
+          "A backup of all generation datasets",
+          "A JCL procedure for managing datasets"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What utility is required to create a GDG base before using GDG generations?",
+        "options": [
+          "IEFBR14",
+          "IDCAMS",
+          "IEBGENER",
+          "IEBCOMPR"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "In the example GDG base MYDATA.BACKUP.REPORT with LIMIT(5) and NOEMPTY, what happens when the 6th generation is created?",
+        "options": [
+          "The job fails with an error",
+          "Only the oldest generation is deleted to make room for the new one",
+          "All generations are deleted",
+          "The newest generation replaces the oldest directly"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/gdg/gdg-generation.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What naming convention does the system use for GDG generations?",
+        "options": [
+          "BASE.NAME.Vn (where n is a version number)",
+          "BASE.NAME.GxxxxVxx (generation and version numbers)",
+          "BASE.NAME.Dyymmdd (date-based naming)",
+          "BASE.NAME.SEQn (sequence numbers only)"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "How do you reference a new generation dataset in JCL relative to the GDG base?",
+        "options": [
+          "Use the full dataset name including generation number",
+          "Use DSN=BASE.NAME(+1) to create the next generation",
+          "Use DSN=BASE.NAME(0) for a new generation",
+          "Use DSN=BASE.NAME(NEW) to create a new generation"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What utility is used in the example to create a GDG generation?",
+        "options": [
+          "IDCAMS",
+          "IEFBR14",
+          "IEBGENER",
+          "IEBCOPY"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/gdg/gdg-generation/referencing-gdg-generations-using-relative-numbers.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What does (0) refer to when referencing a GDG generation?",
+        "options": [
+          "The oldest generation",
+          "The latest (most recently created) generation",
+          "A non-existent generation placeholder",
+          "The first generation ever created"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "If you have generations G0005V00 (latest), G0004V00, and G0003V00, what does (-1) reference?",
+        "options": [
+          "G0005V00",
+          "G0004V00",
+          "G0003V00",
+          "An error because -1 is invalid"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What does the relative number (-2) represent in a GDG?",
+        "options": [
+          "The generation created two days ago",
+          "The generation created just before the one before the latest",
+          "The second generation ever created",
+          "The generation that is two versions ahead of the latest"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology/job-control-language-and-system-display-and-search-facility/gdg/alter-and-delete-gdg.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What command is used to modify properties of an existing GDG base?",
+        "options": [
+          "MODIFY",
+          "ALTER",
+          "UPDATE",
+          "CHANGE"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which GDG base attributes can be changed using the ALTER command?",
+        "options": [
+          "LIMIT (maximum number of generations)",
+          "EMPTY/NOEMPTY behavior",
+          "The GDG base name",
+          "SCRATCH/NOSCRATCH"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What happens when you DELETE a GDG base whose generations were created with SCRATCH?",
+        "options": [
+          "Only the GDG base catalog entry is removed; generations remain",
+          "The GDG base and all generations are completely removed from both catalog and disk",
+          "An error occurs because deletions are not allowed",
+          "Only the newest generation is preserved"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-3-roles-in-mainframe/roles-and-categories.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "multi",
+        "prompt": "Which roles are commonly found in a mainframe IT organization?",
+        "options": [
+          "System Programmers",
+          "Application Developers",
+          "Social Media Managers",
+          "Database Administrators and Security Analysts"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What is the responsibility of a System Programmer?",
+        "options": [
+          "Managing the company's social media presence",
+          "Installation, maintenance, and customization of the mainframe operating system and related software",
+          "Designing office layouts",
+          "Managing cloud storage billing"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What do Operations Analysts ensure?",
+        "options": [
+          "The mainframe's physical appearance is maintained",
+          "The efficient operation of mainframe hardware and software, troubleshooting issues as they arise",
+          "The company's network of office printers",
+          "The cafeteria server is operational"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-3-roles-in-mainframe/roles-and-categories/category-definitions.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What characterizes a Large Enterprise IT Production category?",
+        "options": [
+          "Startups with less than 10 employees",
+          "Large organizations with millions of customers requiring 24/7 availability, reliability, and security",
+          "Small retail stores with local operations only",
+          "Educational institutions with limited IT needs"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What is a key feature of job roles in large enterprise IT production environments?",
+        "options": [
+          "Every employee handles all tasks without specialization",
+          "Significant separation of duties with well-defined tasks",
+          "No formal training or onboarding process",
+          "All roles are interchangeable with no specialization"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "Why is it important for large enterprise IT staff to learn the business over time?",
+        "options": [
+          "To qualify for promotions to non-IT roles",
+          "To grasp the significance of their job role within the larger context of supporting the business",
+          "To reduce the need for technical skills",
+          "To transition into management as quickly as possible"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-4-deeper-dive-in-role-chosen/it-operations-and-system-support-and-services.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the primary responsibility of an Operator (Data Center Support)?",
+        "options": [
+          "Writing business application code in COBOL",
+          "Day-to-day operations and maintenance of the mainframe system, including monitoring performance and backups",
+          "Designing network architecture for the data center",
+          "Managing the company's help desk tickets"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What does a Production Control Analyst manage?",
+        "options": [
+          "Database design and optimization",
+          "Job scheduling, batch processing, and ensuring production runs smoothly",
+          "Hardware procurement and vendor management",
+          "Application security vulnerability scanning"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "multi",
+        "prompt": "Which skills are required for an Operator role?",
+        "options": [
+          "Proficiency in mainframe operating systems (e.g., z/OS)",
+          "Knowledge of system monitoring tools",
+          "Expertise in graphic design",
+          "Troubleshooting abilities and strong communication skills"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-4-deeper-dive-in-role-chosen/it-software-engineers.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What do IT Software Engineers primarily build and maintain?",
+        "options": [
+          "Business applications for end users",
+          "Software and automation that keeps platforms and products running, including tooling and build/release pipelines",
+          "Marketing websites and landing pages",
+          "Mobile applications for customers"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which are typical responsibilities of an IT Software Engineer?",
+        "options": [
+          "Designing and implementing platform-level software components",
+          "Automating operational tasks like provisioning and deployments",
+          "Creating social media content",
+          "Troubleshooting using logs, traces, dumps, and performance data"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "According to the page, where should someone go if they primarily write business applications in COBOL?",
+        "options": [
+          "The IT Software Engineers section is still the right place",
+          "The IT Business/Software Product Application Development and Support section",
+          "The System Programmer section",
+          "The Networking section"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-4-deeper-dive-in-role-chosen/it-architects.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What does an IT Architect do?",
+        "options": [
+          "Writes all the code for a project",
+          "Translates business needs into big picture blueprints for implementation",
+          "Manages the data center cooling system",
+          "Conducts user training sessions"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "What distinguishes a Solution Architect from an Enterprise Architect?",
+        "options": [
+          "Solution Architects focus on software systems; Enterprise Architects take a broader view checking alignment with company mission",
+          "There is no difference between the roles",
+          "Enterprise Architects write code while Solution Architects design databases",
+          "Solution Architects manage budgets while Enterprise Architects manage people"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "Are IT Architect roles typically entry-level positions?",
+        "options": [
+          "Yes, they are common first jobs for graduates",
+          "No, they are rarely entry level and require specific career experiences",
+          "Yes, they require no prior experience",
+          "No, they require only a certification with no work experience"
+        ],
+        "answer": 1
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/mainframe-101-blog-series.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What is the primary focus of the Mainframe 101 blog series?",
+        "options": [
+          "A history of personal computing devices",
+          "An accessible introduction to mainframe computing for beginners",
+          "Advanced mainframe programming techniques",
+          "Cloud migration strategies"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "multi",
+        "prompt": "Which topics are covered in the Mainframe 101 series?",
+        "options": [
+          "Mainframe hardware architecture",
+          "Major vendors and their offerings",
+          "Social media marketing strategies",
+          "Use cases across industries"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      }
+    ]
+  },
+  "https://open-mainframe-project.gitbook.io/mainframe-open-education-project/mainframe-101-blog-series/introduction-to-mainframe-computing-and-mainframe-hardware-a-complete-guide-across-all-major-vendors.md": {
+    "questions": [
+      {
+        "id": "q1",
+        "type": "single",
+        "prompt": "What distinguishes a mainframe from a standard server?",
+        "options": [
+          "Mainframes run on a different electrical voltage",
+          "Mainframes are designed for high-volume transaction processing with extreme reliability, security, and redundancy",
+          "Mainframes can only run proprietary operating systems from a single vendor",
+          "Mainframes are physically smaller than standard servers"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q2",
+        "type": "single",
+        "prompt": "Which company's mainframe line is known as the Z Series?",
+        "options": [
+          "Hewlett Packard Enterprise (HPE)",
+          "IBM",
+          "Unisys",
+          "Fujitsu"
+        ],
+        "answer": 1
+      },
+      {
+        "id": "q3",
+        "type": "single",
+        "prompt": "What is a defining feature of IBM mainframe architecture across generations?",
+        "options": [
+          "Full backward compatibility maintained since the System/360 era",
+          "A requirement to rewrite all software every five years",
+          "Lack of support for any open-source operating system",
+          "Proprietary storage connectors incompatible with industry standards"
+        ],
+        "answer": 0
+      },
+      {
+        "id": "q4",
+        "type": "multi",
+        "prompt": "Which of the following are key characteristics of mainframe hardware architecture?",
+        "options": [
+          "Redundant components (power supplies, cooling, processors)",
+          "Hot-swappable parts for maintenance without downtime",
+          "Consumer-grade hard drives",
+          "Logical partitioning (LPAR) to run multiple workloads isolated on the same machine"
+        ],
+        "answer": [
+          0,
+          1,
+          3
+        ]
+      },
+      {
+        "id": "q5",
+        "type": "single",
+        "prompt": "Which operating systems can run on IBM mainframes?",
+        "options": [
+          "Only z/OS",
+          "z/OS, z/VM, z/VSE, and Linux",
+          "Only Windows Server and Linux",
+          "Only Unix-based operating systems"
+        ],
+        "answer": 1
+      }
+    ]
+  }
+}
