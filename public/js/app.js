@@ -881,34 +881,3 @@ function setupTocScrollTracking() {
   headings.forEach(h => observer.observe(h.el));
 }
 
-/* ── Journey Map ── */
-const TERRAIN_URLS = [
-  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/introduction-what-is-enterprise-computing.md',
-  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today.md',
-  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology.md',
-  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-3-roles-in-mainframe.md',
-  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-5-career-paths-and-opportunities.md',
-  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-5-career-paths-and-opportunities.md',
-];
-
-function setupJourneyMap() {
-  document.querySelectorAll('.terrain-card').forEach((card, i) => {
-    card.addEventListener('click', () => {
-      const url = TERRAIN_URLS[i];
-      if (url && sitemapData) {
-        const target = findNodeByUrl(sitemapData, url);
-        if (target) dismissJourney(target.url);
-      }
-    });
-  });
-  document.querySelectorAll('.terrain-marker-g').forEach((g, i) => {
-    g.addEventListener('click', () => {
-      const url = TERRAIN_URLS[i];
-      if (url && sitemapData) {
-        const target = findNodeByUrl(sitemapData, url);
-        if (target) dismissJourney(target.url);
-      }
-    });
-  });
-}
-

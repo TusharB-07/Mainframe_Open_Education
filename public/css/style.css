@@ -1952,3 +1952,126 @@ body {
 }
 
 /* ── Skeleton Loading ── */
+.skeleton {
+  background: linear-gradient(90deg, var(--code-bg) 25%, var(--hover-bg) 50%, var(--code-bg) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-title { height: 32px; width: 60%; }
+.skeleton-text { height: 16px; width: 100%; }
+.skeleton-text--short { width: 40%; }
+.skeleton-code { height: 120px; width: 100%; border-radius: 8px; }
+
+/* ── Navbar Progress ── */
+#progress-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+#progress-text {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  min-width: 95px;
+  text-align: right;
+}
+.progress-bar {
+  width: 80px;
+  height: 6px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+#progress-fill {
+  height: 100%;
+  background: #34d399;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  min-width: 0;
+}
+
+/* ── Sidebar Checkmarks ── */
+.nav-checkmark {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: transparent;
+  line-height: 16px;
+  text-align: center;
+  transition: color 0.2s;
+}
+.nav-checkmark.completed {
+  color: var(--success);
+}
+
+/* ── Font Size Controls ── */
+.font-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.font-btn {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 4px 8px !important;
+  min-width: 28px;
+  text-align: center;
+}
+.font-size-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  min-width: 32px;
+  text-align: center;
+}
+
+/* ── Page Meta ── */
+.page-meta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+.page-meta-status {
+  color: var(--success);
+  font-weight: 600;
+}
+.page-meta-status.completed {
+  background: #f0fdf4;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #86efac;
+}
+
+/* ── Edit Link ── */
+.page-edit-link {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  font-size: 13px;
+}
+.page-edit-link a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.page-edit-link a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* ── Splash Screen ── */
+/* ── Splash / Journey Overlay ── */
+#splash{
+  position:fixed;
+  inset:0;
+  z-index:10000;

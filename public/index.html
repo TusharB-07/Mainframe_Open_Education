@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mainframe Open Education</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
   <div id="splash">
     <div class="splash-bg"></div>
     <div class="splash-scene">
@@ -16,6 +25,7 @@
       </div>
       <p class="splash-message">click anywhere to start</p>
     </div>
+  </div>
   <header id="top-header">
     <div class="header-left">
       <button id="sidebar-toggle" title="Toggle sidebar">&#9776;</button>
@@ -46,6 +56,7 @@
       <button id="dark-toggle" class="header-btn dark-toggle" title="Toggle dark mode">&#9790;</button>
     </div>
   </header>
+
   <div id="app">
     <aside id="sidebar">
       <nav id="nav-tree"></nav>
@@ -58,6 +69,28 @@
         <img class="c-float" src="/logo/element5.png" style="bottom:8%;left:0%;width:clamp(55px,6.5vw,100px);animation-delay:10s;opacity:0.035" alt="">
         <img class="c-float" src="/logo/element7.png" style="bottom:20%;right:-2%;width:clamp(45px,5vw,80px);animation-delay:15s;opacity:0.03" alt="">
       </div>
+      <div id="content-toolbar">
+        <div id="breadcrumb"></div>
+        <div id="view-mode">
+          <button class="mode-btn active" data-mode="sandbox" title="COBOL Sandbox">Sandbox</button>
+        </div>
+      </div>
+      <div id="sandbox-container" style="display:none">
+        <div class="sandbox-header">
+          <h2>COBOL Sandbox</h2>
+          <div class="sandbox-controls">
+            <label class="sandbox-lang-label">
+              Language:
+              <select id="sandbox-lang">
+                <option value="cobol">COBOL</option>
+              </select>
+            </label>
+            <button id="sandbox-run" class="sandbox-run-btn">Run</button>
+          </div>
+        </div>
+        <div class="sandbox-editor-wrapper">
+          <textarea id="sandbox-editor" spellcheck="false" placeholder="Write your COBOL code here...">       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO.
        PROCEDURE DIVISION.
            DISPLAY "Hello from COBOL".
            STOP RUN.</textarea>
@@ -110,7 +143,6 @@
           <div class="welcome-cta">
             <div class="cta-content">
               <div class="cta-badge">JOIN US</div>
-      </div>
     </div>
   </div>
 <script src="js/app.js"></script>
