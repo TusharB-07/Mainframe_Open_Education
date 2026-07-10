@@ -881,3 +881,81 @@ function setupTocScrollTracking() {
   headings.forEach(h => observer.observe(h.el));
 }
 
+/* ── Journey Map ── */
+const TERRAIN_URLS = [
+  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/introduction-what-is-enterprise-computing.md',
+  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-1-what-is-a-mainframe-today.md',
+  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-2-mainframe-101-foundational-technology.md',
+  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-3-roles-in-mainframe.md',
+  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-5-career-paths-and-opportunities.md',
+  'https://open-mainframe-project.gitbook.io/mainframe-open-education-project/chapter-5-career-paths-and-opportunities.md',
+];
+
+function setupJourneyMap() {
+  document.querySelectorAll('.terrain-card').forEach((card, i) => {
+    card.addEventListener('click', () => {
+      const url = TERRAIN_URLS[i];
+      if (url && sitemapData) {
+        const target = findNodeByUrl(sitemapData, url);
+        if (target) dismissJourney(target.url);
+      }
+    });
+  });
+  document.querySelectorAll('.terrain-marker-g').forEach((g, i) => {
+    g.addEventListener('click', () => {
+      const url = TERRAIN_URLS[i];
+      if (url && sitemapData) {
+        const target = findNodeByUrl(sitemapData, url);
+        if (target) dismissJourney(target.url);
+      }
+    });
+  });
+}
+
+/* ── Splash ── */
+function dismissSplash() {
+  const splash = document.getElementById('splash');
+  if (!splash || splash.classList.contains('dismissed')) return;
+  splash.classList.add('dismissed');
+  /* Hide main content immediately so it doesn't show through fading overlay */
+  const app = document.getElementById('app');
+  const header = document.getElementById('top-header');
+  if (app) app.style.display = 'none';
+  if (header) header.style.display = 'none';
+  setTimeout(() => {
+    splash.style.display = 'none';
+    const journey = document.getElementById('journey');
+    if (journey) journey.classList.add('visible');
+  }, 600);
+}
+
+async function dismissJourney(targetUrl) {
+  const journey = document.getElementById('journey');
+  if (!journey || journey.classList.contains('dismissed')) return;
+  journey.classList.remove('visible');
+  journey.classList.add('dismissed');
+  const fade = new Promise(r => setTimeout(r, 600));
+  let load = Promise.resolve();
+  if (targetUrl && sitemapData) {
+    const node = findNodeByUrl(sitemapData, targetUrl);
+    if (node) load = loadPage(node);
+  }
+  await Promise.all([fade, load]);
+  journey.style.display = 'none';
+  const app = document.getElementById('app');
+  const header = document.getElementById('top-header');
+  if (app) app.style.display = 'flex';
+  if (header) header.style.display = 'flex';
+}
+
+
+async function init() {
+  try {
+    sitemapData = await fetchSitemap();
+    buildNavTree(sitemapData, document.getElementById('nav-tree'));
+    document.getElementById('splash')?.addEventListener('click', dismissSplash);
+    setupJourneyMap();
+    document.getElementById('journey-start')?.addEventListener('click', () => dismissJourney());
+  } catch(e) { console.error(e); }
+}
+init();
