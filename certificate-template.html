@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Certificate of Completion — Mainframe Open Education</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1F3D;
+    --navy-deep:#0A1730;
+    --blue:#2F5FD6;
+    --blue-soft:#5B7FE0;
+    --brass:#A9812E;
+    --brass-soft:#C9A65A;
+    --ink:#1C2534;
+    --muted:#5B6472;
+    --hairline:#D8DCE3;
+    --paper:#FFFFFF;
+    --page-bg:#EDEFF3;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--page-bg);
+    font-family:'IBM Plex Sans', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:28px 12px;
+  }
+  .stage{
+    width:100%;
+    max-width:1200px;
+  }
+  .certificate{
+    position:relative;
+    background:var(--paper);
+    width:100%;
+    min-height:100vh;
+    padding:36px 56px 30px;
+    border:1.5px solid var(--navy);
+    outline:1px solid var(--navy);
+    outline-offset:6px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 30px 60px rgba(15,31,61,.16), 0 4px 14px rgba(15,31,61,.08);
+  }
+  .trace{ position:absolute; width:120px; height:120px; pointer-events:none; }
+  .trace.tl{ top:14px; left:14px; }
+  .trace.tr{ top:14px; right:14px; transform:scaleX(-1); }
+  .trace.bl{ bottom:14px; left:14px; transform:scaleY(-1); }
+  .trace.br{ bottom:14px; right:14px; transform:scale(-1,-1); }
+  .watermark{
+    position:absolute;
+    left:50%; top:63%;
+    transform:translate(-50%,-50%);
+    width:360px; height:auto;
+    opacity:.05;
+    pointer-events:none;
+    z-index:0;
+  }
+  .content{ position:relative; z-index:1; display:flex; flex-direction:column; flex:1; min-height:0; }
+  .bg-pattern{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .bg-pattern img{
+    position:absolute;
+    height:auto;
+    opacity:.05;
+    filter:grayscale(1);
+  }
+  .watermark{
+    position:absolute;
+    left:50%; top:63%;
+    transform:translate(-50%,-50%);
+    width:380px; height:auto;
+    opacity:.045;
+    pointer-events:none;
+    z-index:0;
+  }
+  .eyebrow{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.28em;
+    color:var(--muted);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin-bottom:20px;
+  }
+  .eyebrow .ln{ height:1px; width:64px; background:var(--hairline); }
+  .title{
+    text-align:center;
+    font-family:'IBM Plex Serif', serif;
+    font-weight:500;
+    font-size:42px;
+    letter-spacing:.02em;
+    color:var(--navy);
+    line-height:1;
+    margin:0 0 20px;
+  }
+  .presented-to{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:20px;
+  }
+  .name{
+    text-align:center;
+    font-family:'IBM Plex Serif', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:46px;
+    color:var(--ink);
+    padding:4px 12px 12px;
+    border-bottom:1.5px solid transparent;
+    border-image:linear-gradient(90deg, transparent, var(--blue) 20%, var(--brass) 80%, transparent) 1;
+    display:inline-block;
+    margin:0 auto 20px;
+    min-width:60%;
+  }
+  .name-wrap{ display:flex; justify-content:center; }
+  .date-text{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:17px;
+    color:var(--muted);
+    margin-bottom:20px;
+  }
+  .body-text{
+    text-align:center;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:400;
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink);
+    max-width:760px;
+    margin:0 auto 20px;
+  }
+  .body-text b{ font-weight:600; color:var(--navy); }
+  .source-link{
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--blue);
+    margin-bottom:20px;
+    word-break:break-all;
+  }
+  .pillars{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:0;
+    margin:0 auto 20px;
+    padding-top:16px;
+    border-top:1px solid var(--hairline);
+    max-width:920px;
+    width:100%;
+  }
+  .pillar{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    padding:0 6px;
+    position:relative;
+  }
+  .pillar:not(:last-child)::after{
+    content:'';
+    position:absolute;
+    right:0; top:8px;
+    width:1px; height:30px;
+    background:var(--hairline);
+  }
+  .pillar img{ height:30px; width:auto; opacity:.88; }
+  .pillar span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:8px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-align:center;
+    line-height:1.3;
+  }
+  .footer{
+    margin-top:20px;
+    padding-top:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+  }
+  .sig{
+    width:230px;
+    text-align:center;
+  }
+  .sig .mark{
+    font-family:'IBM Plex Serif', serif;
+    font-style:italic;
+    font-size:24px;
+    color:var(--navy);
+    border-bottom:1px solid var(--ink);
+    padding-bottom:5px;
+    margin-bottom:6px;
+  }
+  .sig .role{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .seal{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    width:180px;
+  }
+  .seal-ring{
+    width:92px; height:92px;
+    border-radius:50%;
+    border:1.5px solid var(--brass);
+    outline:1px solid var(--brass);
+    outline-offset:3px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:radial-gradient(circle at 50% 40%, #fbf8f0, #fff);
+  }
+  .seal-ring img{ height:44px; width:auto; }
+  .seal-text{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:8px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    text-align:center;
+  }
+  @media print{
+    body{ background:#fff; padding:0; min-height:auto; }
+    .stage{ max-width:none; margin:0; }
+    .certificate{ box-shadow:none; border:1.5px solid var(--navy); outline:1px solid var(--navy); outline-offset:4px; width:100%; min-height:100vh; page-break-inside:avoid; }
+    @page{ size:A4 landscape; margin:0; }
+    .content{ min-height:0; flex:1; }
+  }
+  @media (max-width:760px){
+    .certificate{ padding:26px 18px 20px; }
+    .title{ font-size:24px; }
+    .name{ font-size:26px; }
+    .body-text{ font-size:12px; }
+    .pillars{ flex-wrap:wrap; row-gap:14px; }
+    .pillar{ flex:1 1 22%; }
+    .pillar:nth-child(4)::after{ display:none; }
+    .footer{ flex-direction:column; align-items:center; gap:16px; }
+    .sig{ width:100%; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="certificate">
+    <svg class="trace tl" viewBox="0 0 120 120" fill="none"><path d="M0 40 H30 L40 30 V0" stroke="#0F1F3D" stroke-width="1.2" opacity="0.35"/><circle cx="40" cy="30" r="2.4" fill="#2F5FD6" opacity="0.6"/><path d="M0 70 H16 L26 60 V20 L36 10 H70" stroke="#0F1F3D" stroke-width="1" opacity="0.2"/><circle cx="70" cy="10" r="1.8" fill="#A9812E" opacity="0.6"/></svg>
+    <svg class="trace tr" viewBox="0 0 120 120" fill="none"><path d="M0 40 H30 L40 30 V0" stroke="#0F1F3D" stroke-width="1.2" opacity="0.35"/><circle cx="40" cy="30" r="2.4" fill="#2F5FD6" opacity="0.6"/><path d="M0 70 H16 L26 60 V20 L36 10 H70" stroke="#0F1F3D" stroke-width="1" opacity="0.2"/><circle cx="70" cy="10" r="1.8" fill="#A9812E" opacity="0.6"/></svg>
+    <svg class="trace bl" viewBox="0 0 120 120" fill="none"><path d="M0 40 H30 L40 30 V0" stroke="#0F1F3D" stroke-width="1.2" opacity="0.35"/><circle cx="40" cy="30" r="2.4" fill="#2F5FD6" opacity="0.6"/><path d="M0 70 H16 L26 60 V20 L36 10 H70" stroke="#0F1F3D" stroke-width="1" opacity="0.2"/><circle cx="70" cy="10" r="1.8" fill="#A9812E" opacity="0.6"/></svg>
+    <svg class="trace br" viewBox="0 0 120 120" fill="none"><path d="M0 40 H30 L40 30 V0" stroke="#0F1F3D" stroke-width="1.2" opacity="0.35"/><circle cx="40" cy="30" r="2.4" fill="#2F5FD6" opacity="0.6"/><path d="M0 70 H16 L26 60 V20 L36 10 H70" stroke="#0F1F3D" stroke-width="1" opacity="0.2"/><circle cx="70" cy="10" r="1.8" fill="#A9812E" opacity="0.6"/></svg>
+    <div class="watermark">
+      <svg viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="10" width="280" height="140" rx="12" stroke="#0F1F3D" stroke-width="1.5"/>
+        <polygon points="160,25 185,55 175,55 190,85 130,85 145,55 135,55" fill="#0F1F3D" opacity="0.4"/>
+        <text x="160" y="100" text-anchor="middle" font-family="Georgia, serif" font-size="52" fill="#0F1F3D" font-weight="bold" opacity="0.5">MOE</text>
+        <text x="160" y="130" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#0F1F3D" font-weight="500" opacity="0.35" letter-spacing="3">MAINFRAME OPEN EDUCATION</text>
+      </svg>
+    </div>
+    <div class="bg-pattern">
+      <svg style="position:absolute;top:6%;left:4%;width:200px;height:auto;opacity:.06;filter:grayscale(1)" viewBox="0 0 160 160" fill="none">
+        <path d="M0 80h40l15-20V30" stroke="#0F1F3D" stroke-width="1.2"/><circle cx="55" cy="30" r="2.5" fill="#2F5FD6" opacity="0.5"/>
+        <path d="M0 120h20l10-10V70" stroke="#0F1F3D" stroke-width="0.8"/><circle cx="30" cy="70" r="2" fill="#A9812E" opacity="0.5"/>
+        <path d="M40 160v-20l10-10h30" stroke="#0F1F3D" stroke-width="0.7"/><circle cx="80" cy="130" r="1.8" fill="#2F5FD6" opacity="0.4"/>
+      </svg>
+      <svg style="position:absolute;top:5%;right:4%;width:180px;height:auto;opacity:.06;filter:grayscale(1)" viewBox="0 0 160 160" fill="none">
+        <path d="M160 80h-40l-15-20V30" stroke="#0F1F3D" stroke-width="1.2"/><circle cx="105" cy="30" r="2.5" fill="#A9812E" opacity="0.5"/>
+        <path d="M160 120h-20l-10-10V70" stroke="#0F1F3D" stroke-width="0.8"/><circle cx="130" cy="70" r="2" fill="#2F5FD6" opacity="0.5"/>
+        <path d="M120 160v-20l-10-10H80" stroke="#0F1F3D" stroke-width="0.7"/><circle cx="80" cy="130" r="1.8" fill="#A9812E" opacity="0.4"/>
+      </svg>
+      <svg style="position:absolute;bottom:8%;left:4%;width:220px;height:auto;opacity:.06;filter:grayscale(1)" viewBox="0 0 160 160" fill="none">
+        <path d="M0 80h30l10-15V20" stroke="#0F1F3D" stroke-width="1"/><circle cx="40" cy="20" r="2.2" fill="#A9812E" opacity="0.5"/>
+        <path d="M0 110h15l8-8V60" stroke="#0F1F3D" stroke-width="0.7"/><circle cx="23" cy="60" r="1.8" fill="#2F5FD6" opacity="0.4"/>
+        <path d="M20 160v-15l10-10h50" stroke="#0F1F3D" stroke-width="0.6"/><circle cx="80" cy="135" r="2" fill="#A9812E" opacity="0.4"/>
+      </svg>
+      <svg style="position:absolute;bottom:8%;right:4%;width:200px;height:auto;opacity:.06;filter:grayscale(1)" viewBox="0 0 160 160" fill="none">
+        <path d="M160 80h-30l-10-15V20" stroke="#0F1F3D" stroke-width="1"/><circle cx="120" cy="20" r="2.2" fill="#2F5FD6" opacity="0.5"/>
+        <path d="M160 110h-15l-8-8V60" stroke="#0F1F3D" stroke-width="0.7"/><circle cx="137" cy="60" r="1.8" fill="#A9812E" opacity="0.4"/>
+        <path d="M140 160v-15l-10-10H80" stroke="#0F1F3D" stroke-width="0.6"/><circle cx="80" cy="135" r="2" fill="#2F5FD6" opacity="0.4"/>
+      </svg>
+      <svg style="position:absolute;top:48%;left:1%;width:120px;height:auto;opacity:.05;filter:grayscale(1)" viewBox="0 0 120 120" fill="none">
+        <path d="M0 60h20l8-8V15" stroke="#0F1F3D" stroke-width="0.8"/><circle cx="28" cy="15" r="1.8" fill="#A9812E" opacity="0.4"/>
+        <path d="M0 80h12l6-6V45" stroke="#0F1F3D" stroke-width="0.6"/><circle cx="18" cy="45" r="1.5" fill="#2F5FD6" opacity="0.4"/>
+      </svg>
+      <svg style="position:absolute;top:45%;right:1%;width:140px;height:auto;opacity:.05;filter:grayscale(1)" viewBox="0 0 120 120" fill="none">
+        <path d="M120 60h-20l-8-8V15" stroke="#0F1F3D" stroke-width="0.8"/><circle cx="92" cy="15" r="1.8" fill="#2F5FD6" opacity="0.4"/>
+        <path d="M120 80h-12l-6-6V45" stroke="#0F1F3D" stroke-width="0.6"/><circle cx="102" cy="45" r="1.5" fill="#A9812E" opacity="0.4"/>
+      </svg>
+    </div>
+    <div class="content">
+    <div class="eyebrow"><span class="ln"></span>The Linux Foundation<span class="ln"></span></div>
+    <div class="title">Certificate of Completion</div>
+    <div class="presented-to">This certifies that</div>
+    <div class="name-wrap">
+      <div class="name">{{name}}</div>
+    </div>
+    <div class="date-text">{{date}}</div>
+    <p class="body-text">
+      has successfully completed the <b>Mainframe Open Education (MOE)</b> curriculum, demonstrating
+      applied proficiency in enterprise mainframe systems, security, resilience, and modernization —
+      developed under the <b>Open Mainframe Project</b>, a project of the Linux Foundation.
+    </p>
+    <div class="source-link">open-mainframe-project.gitbook.io/mainframe-open-education-project</div>
+    <div class="pillars">
+      <div class="pillar">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%232F5FD6' d='M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4zm0 22c-5.523 0-10-4.477-10-10S10.477 6 16 6s10 4.477 10 10-4.477 10-10 10z'/%3E%3Cpath fill='%232F5FD6' d='M15 10h2v6h-2z'/%3E%3Cpath fill='%232F5FD6' d='M15 18h2v2h-2z'/%3E%3C/svg%3E">
+        <span>Enterprise Computing</span>
+      </div>
+      <div class="pillar">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23A9812E' d='M7 5L5 7v20l2 2h18l2-2V7l-2-2H7zm18 22H7V7h18v20z'/%3E%3Cpath fill='%23A9812E' d='M11 11h10v2H11zm0 4h10v2H11zm0 4h10v2H11z'/%3E%3C/svg%3E">
+        <span>JCL &amp; Utilities</span>
+      </div>
+      <div class="pillar">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%232F5FD6' d='M16 2C8.268 2 2 8.268 2 16s6.268 14 14 14 14-6.268 14-14S23.732 2 16 2zm0 26C9.373 28 4 22.627 4 16S9.373 4 16 4s12 5.373 12 12-5.373 12-12 12z'/%3E%3Cpath fill='%232F5FD6' d='M16 8a2 2 0 100 4 2 2 0 000-4zm-3 6v8h2v-6h2v6h2v-8h-6z'/%3E%3C/svg%3E">
+        <span>Security &amp; Resilience</span>
+      </div>
+      <div class="pillar">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23A9812E' d='M19 2l-7 8h4v12h2V10h4l-7-8z'/%3E%3Cpath fill='%23A9812E' d='M4 18v8c0 2.2 1.8 4 4 4h16c2.2 0 4-1.8 4-4v-8h-2v8c0 1.1-.9 2-2 2H8c-1.1 0-2-.9-2-2v-8H4z'/%3E%3C/svg%3E">
+        <span>Modernization</span>
+      </div>
+      <div class="pillar">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%232F5FD6' d='M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4zm0 22c-5.523 0-10-4.477-10-10S10.477 6 16 6s10 4.477 10 10-4.477 10-10 10z'/%3E%3Cpath fill='%232F5FD6' d='M16 8v2c3.314 0 6 2.686 6 6s-2.686 6-6 6v2c4.418 0 8-3.582 8-8s-3.582-8-8-8z'/%3E%3C/svg%3E">
+        <span>Mainframe Operations</span>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="sig">
+        <div class="mark">{{name}}</div>
+        <div class="role">Certificate Holder</div>
+      </div>
+      <div class="seal">
+        <div class="seal-ring">
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath fill='%23A9812E' d='M20 2L4 10v12c0 10.5 16 20 16 20s16-9.5 16-20V10L20 2z'/%3E%3Ctext x='20' y='24' text-anchor='middle' font-size='6' fill='white' font-family='serif' font-weight='bold'>MOE</text%3E%3C/svg%3E">
+        </div>
+        <div class="seal-text">Open Mainframe Project</div>
+      </div>
+      <div class="sig">
+        <div class="mark">Open Mainframe Project</div>
+        <div class="role">Issuing Authority</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

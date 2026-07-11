@@ -435,22 +435,114 @@ function preprocessGitBookFlavoredMd(raw, pageUrl) {
   text = text.replace(/---\s*\n\s*#\s*Agent Instructions[\s\S]*$/, '');
   text = text.replace(/#\s*Agent Instructions[\s\S]*$/, '');
 
+  return text;
 }
+
+function extractMarkdownFromHtml(html) {
+  // Protect angle brackets inside GitBook shortcodes from cheerio's HTML parser
+  // so e.g. {% embed url="<https://youtu.be/xxx>" %} doesn't get mangled.
+  // Handle both literal <> and already-entity-encoded &lt; &gt; forms.
+  html = html.replace(/{%[^%]*%}/g, (match) =>
+    match
+      .replace(/&lt;/g, '&amp;lt;')
+      .replace(/&gt;/g, '&amp;gt;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+  );
+  const $ = require('cheerio').load(html);
+  $('script, style, nav, header, footer, svg, noscript').remove();
+
+  let content =
+    $('main').html() ||
+    $('[role="main"]').html() ||
+    $('article').html() ||
+    $('.content').html() ||
+    $('.prose').html() ||
+    $('#__next').html();
+
+  if (!content) {
+    const body = $('body');
+    body.children().filter((i, el) => {
+      const tag = (el.tagName || '').toLowerCase();
+      return ['nav', 'header', 'footer', 'script', 'style', 'svg', 'noscript'].includes(tag);
+    }).remove();
+    content = body.html();
+  }
+
+  if (!content) return null;
+
+  // Strip GitBook footer elements (page nav, last updated, was this helpful)
+  try {
+    const $c = require('cheerio').load(content);
+    $c('[class*="max-w-3xl"]').each((i, el) => {
+      const html = $c(el).html() || '';
+      const text = $c(el).text() || '';
+      if (text.includes('Was this helpful') || html.includes('Last updated')) {
+        $c(el).remove();
+      } else if (text.includes('Previous') || text.includes('Next')) {
+        $c(el).remove();
+      }
+    });
+    content = $c('body').html() || content;
+  } catch (e) {
+    // fall through if cleanup fails
+  }
+
+  return content;
+}
+
+function parseSitemap(markdown) {
+  const lines = markdown.split('\n');
+  const root = [];
+  const stack = [{ children: root, level: -1 }];
+  const linkRegex = /^\s*-\s*\[([^\]]+)\]\(([^)]+)\)/;
+
+  for (const line of lines) {
+    const match = line.match(linkRegex);
+    if (!match) continue;
+    const title = match[1];
+    const url = match[2];
+    const leadingSpaces = line.match(/^(\s*)/)[1].length;
+    const level = Math.floor(leadingSpaces / 2);
+    const node = { title, url, children: [] };
+
+    while (stack.length > 1 && stack[stack.length - 1].level >= level) {
+      stack.pop();
+    }
+    stack[stack.length - 1].children.push(node);
+    stack.push({ children: node.children, level });
+  }
+  return root;
+}
+
 app.get('/api/sitemap', (req, res) => {
   const mdPath = path.join(__dirname, 'sitemap.md');
   const markdown = fs.readFileSync(mdPath, 'utf-8');
   res.json(parseSitemap(markdown));
 });
+
 function gitBookUrl(mdUrl, rendered) {
   if (!rendered) return mdUrl;
   return mdUrl.replace(/\.md$/, '');
 }
+
 app.get('/api/page', async (req, res) => {
   const { url, mode } = req.query;
   if (!url) return res.status(400).json({ error: 'Missing url parameter' });
+
   try {
-    const fetchUrl_ = url.replace(/\.md$/, '');
+    const fetchUrl_ = url.replace(/\.md$/, '');  // strip .md to get full HTML with resolved image URLs
     const rawText = await fetchUrl(fetchUrl_);
+
+    if (mode === 'iframe') {
+      let fixedHtml = fixImageUrls(rawText, fetchUrl_);
+      return res.json({
+        content: fixedHtml,
+        mode: 'iframe',
+        url: fetchUrl_,
+      });
+    }
+
     if (mode === 'raw') {
       let rawMd = extractMarkdownFromHtml(rawText);
       if (!rawMd || rawMd.trim().length < 20) rawMd = rawText;
@@ -458,21 +550,194 @@ app.get('/api/page', async (req, res) => {
       rawMd = fixImageUrls(rawMd, url);
       return res.json({ content: rawMd, mode: 'raw', url });
     }
+
     let markdown = extractMarkdownFromHtml(rawText);
-    if (!markdown || markdown.trim().length < 20) markdown = rawText;
+    if (!markdown || markdown.trim().length < 20) {
+      markdown = rawText;
+    }
+
     markdown = preprocessGitBookFlavoredMd(markdown, url);
     markdown = fixImageUrls(markdown, url);
-    const html = require('marked').parse(markdown, { breaks: true, gfm: true });
+
+    const html = marked.parse(markdown, { breaks: true, gfm: true });
+
     const headingRegex = /<h([234])[^>]*id="([^"]*)"[^>]*>([\s\S]*?)<\/h\1>/gi;
-    const headings = []; let hMatch;
+    const headings = [];
+    let hMatch;
     while ((hMatch = headingRegex.exec(html)) !== null) {
       const text = hMatch[3].replace(/<[^>]+>/g, '').trim();
       if (text) headings.push({ level: parseInt(hMatch[1]), id: hMatch[2], text });
     }
+
     res.json({ content: html, mode: 'markdown', url, headings });
   } catch (err) {
-    console.error('Failed to fetch ' + url + ':', err.message);
-    res.status(502).json({ error: 'Failed to fetch content: ' + err.message });
+    console.error(`Failed to fetch ${url}:`, err.message);
+    res.status(502).json({ error: `Failed to fetch content: ${err.message}` });
   }
 });
-app.listen(PORT, () => console.log('MOE GitBook Viewer running at http://localhost:' + PORT));
+
+const fileUrlCache = new Map();
+
+app.get('/api/file/:id', async (req, res) => {
+  const { id } = req.params;
+  if (!id) return res.status(400).json({ error: 'Missing file id' });
+
+  const pageUrl = `${GITBOOK_BASE}/mainframe-open-education-project/files/${id}`;
+
+  try {
+    const cached = fileUrlCache.get(id);
+    const actualUrl = cached || await resolveFileUrl(pageUrl);
+
+    if (!cached && actualUrl) fileUrlCache.set(id, actualUrl);
+
+    if (actualUrl) {
+      const imgResponse = await fetch(actualUrl);
+      const contentType = imgResponse.headers.get('content-type') || 'application/octet-stream';
+      const buffer = await imgResponse.arrayBuffer();
+      res.set('Content-Type', contentType);
+      res.set('Cache-Control', 'public, max-age=86400');
+      return res.send(Buffer.from(buffer));
+    }
+
+    res.redirect(pageUrl);
+  } catch (err) {
+    console.error(`File proxy failed for ${id}:`, err.message);
+    res.redirect(pageUrl);
+  }
+});
+
+async function resolveFileUrl(pageUrl) {
+  const response = await fetch(pageUrl, {
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MOE-Viewer/1.0)' }
+  });
+  const html = await response.text();
+
+  const patterns = [
+    /https?:\/\/[^"'\s>]+files\.gitbook\.io[^"'\s>]+(?:png|jpg|jpeg|gif|webp|svg)/i,
+    /https?:\/\/[^"'\s>]+files\.gitbook\.io[^"'\s>]+/i,
+    /"url"\s*:\s*"([^"]+files\.gitbook\.io[^"]+)"/i,
+    /"src"\s*:\s*"([^"]+(?:png|jpg|jpeg|gif|webp|svg)[^"]*)"/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (match) {
+      let url = match[1] || match[0];
+      url = url.replace(/\\u0026/g, '&').replace(/&amp;/g, '&');
+      return url;
+    }
+  }
+
+  return null;
+}
+
+app.get('/api/proxy', async (req, res) => {
+  const { url } = req.query;
+  if (!url) return res.status(400).json({ error: 'Missing url parameter' });
+
+  try {
+    const renderedUrl = gitBookUrl(url, true);
+    let html = await fetchUrl(renderedUrl);
+    html = fixImageUrls(html, renderedUrl);
+
+    const $ = require('cheerio').load(html);
+    $('nav, header, footer, aside, .sidebar, [class*="sidebar"], [class*="toc"], .page-no-toc, .gb-trademark, [data-testid="gb-trademark"], .theme-bold\\:text-header-link').remove();
+    $('script:not([type="application/ld+json"])').remove();
+    html = $.html();
+
+    html = html.replace(/<style[^>]*>[\s\S]*?<\/style>/g, (match) => {
+      if (match.includes('sidebar') || match.includes('header') || match.includes('footer') || match.includes('nav')) {
+        return '';
+      }
+      return match;
+    });
+
+    res.send(html);
+  } catch (err) {
+    res.status(502).json({ error: `Proxy failed: ${err.message}` });
+  }
+});
+
+app.get('/api/llms', async (req, res) => {
+  try {
+    const text = await fetchUrl(`${GITBOOK_BASE}/mainframe-open-education-project/llms.txt`);
+    const fixed = fixImageUrls(text, `${GITBOOK_BASE}/mainframe-open-education-project/`);
+    res.type('text/plain').send(fixed);
+  } catch (err) {
+    res.status(502).json({ error: `Failed to fetch llms.txt: ${err.message}` });
+  }
+});
+
+const PISTON_BASE_URL = process.env.PISTON_URL || 'http://localhost:2000';
+
+function extensionFor(language) {
+  const map = { cobol: 'cob', python: 'py', javascript: 'js' };
+  return map[language] || 'txt';
+}
+
+app.post('/api/sandbox/execute', async (req, res) => {
+  const { language, code, stdin } = req.body;
+  if (!language || !code) {
+    return res.status(400).json({ error: 'language and code are required' });
+  }
+  try {
+    const response = await fetch(`${PISTON_BASE_URL}/api/v2/execute`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        language,
+        version: '*',
+        files: [{ name: `main.${extensionFor(language)}`, content: code }],
+        stdin: stdin || '',
+        run_timeout: 3000,
+        compile_timeout: 3000
+      })
+    });
+    const result = await response.json();
+    if (!response.ok) return res.status(response.status).json(result);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: 'sandbox execution failed', detail: err.message });
+  }
+});
+
+app.get('/certification', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'certification.html'));
+});
+
+app.post('/api/certificate', async (req, res) => {
+  try {
+    const { name } = req.body;
+    if (!name || !name.trim()) {
+      return res.status(400).json({ error: 'Name is required' });
+    }
+    const date = new Date().toLocaleDateString('en-US', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+    const certId = `MOE-CERT-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    const tmpl = fs.readFileSync(path.join(__dirname, 'certificate-template.html'), 'utf-8');
+    const html = handlebars.compile(tmpl)({ name: name.trim(), date, certId });
+
+    const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1200, height: 849 });
+    await page.setContent(html, { waitUntil: 'load', timeout: 15000 });
+    const raw = await page.pdf({ format: 'A4', landscape: true, printBackground: true, margin: { top: '0', right: '0', bottom: '0', left: '0' } });
+    await browser.close();
+
+    const buf = Buffer.from(raw);
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment; filename="MOE-Certificate-${Date.now()}.pdf"`,
+      'Content-Length': buf.length,
+    });
+    res.end(buf);
+  } catch (err) {
+    console.error('Certificate generation failed:', err);
+    res.status(500).json({ error: 'Failed to generate certificate', detail: err.message });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`MOE GitBook Viewer running at http://localhost:${PORT}`);
+});

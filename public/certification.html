@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certification — MOE</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    .cert-page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 20px 24px 60px;
+    }
+    .cert-page h1 {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--navy, #0F1F3D);
+    }
+    .cert-page .subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .cert-question {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      transition: border-color 0.15s;
+    }
+    .cert-question.correct { background: #f0fdf4; border-color: #86efac; }
+    .cert-question.incorrect { background: #fef2f2; border-color: #fca5a5; }
+    .cert-question .q-prompt {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+    .cert-question .q-options { display: flex; flex-direction: column; gap: 8px; }
+    .cert-question .q-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.1s;
+      background: var(--bg);
+      font-size: 15px;
+      line-height: 1.4;
+      position: relative;
+    }
+    .cert-question .q-option::before {
+      content: '';
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      border: 2px solid var(--text-muted);
+      border-radius: 50%;
+      margin-top: 2px;
+      transition: border-color 0.15s, background 0.15s;
+      background: var(--bg);
+    }
+    .cert-question .q-option:has(input[type="checkbox"])::before { border-radius: 4px; }
+    .cert-question .q-option:has(input:checked)::before {
+      border-color: var(--primary);
+      background: var(--primary);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+      background-size: 12px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .cert-question .q-option:hover { background: #f1f5f9; border-color: #cbd5e1; }
+    .cert-question .q-option input {
+      position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none;
+    }
+    .cert-question .q-option .opt-text { flex: 1; }
+    .cert-question .q-option.correct-opt { background: #f0fdf4; border-color: #86efac; }
+    .cert-question .q-option.correct-opt .opt-text::after { content: ' \2713'; color: var(--success); font-weight: 700; }
+    .cert-question .q-option.incorrect-opt { background: #fef2f2; border-color: #fca5a5; }
+    .cert-question .q-option.incorrect-opt .opt-text::after { content: ' \2717'; color: #dc2626; font-weight: 700; }
+    .cert-actions { margin-top: 28px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 12px 28px; font-size: 16px; font-weight: 600; border: none;
+      border-radius: 8px; cursor: pointer; background: var(--primary);
+      color: #fff; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #1d4ed8; }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-secondary {
+      padding: 12px 28px; font-size: 16px; font-weight: 600;
+      border: 1px solid var(--border-color); border-radius: 8px; cursor: pointer;
+      background: var(--bg); color: var(--text); transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: var(--hover-bg); }
+    .cert-result {
+      margin-top: 24px; padding: 20px; border-radius: 10px;
+      text-align: center; display: none;
+    }
+    .cert-result.visible { display: block; }
+    .cert-result.pass { background: #f0fdf4; border: 2px solid #86efac; }
+    .cert-result.fail { background: #fef2f2; border: 2px solid #fca5a5; }
+    .cert-result .result-score { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+    .cert-result .result-label { font-size: 16px; color: var(--text-muted); margin-bottom: 16px; }
+    .cert-result .result-pass { color: var(--success); }
+    .cert-result .result-fail { color: #dc2626; }
+    .cert-form { margin-top: 16px; display: none; }
+    .cert-form.visible { display: block; }
+    .cert-form label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .cert-form input {
+      width: 100%; max-width: 400px; padding: 10px 14px;
+      border: 1px solid var(--border-color); border-radius: 8px;
+      font-size: 16px; font-family: inherit; outline: none;
+    }
+    .cert-form input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+    .cert-form .cert-error { color: #dc2626; font-size: 13px; margin-top: 6px; display: none; }
+    .dark .cert-question { background: #1e1e20; }
+    .dark .cert-question.correct { background: #0a2e1a; border-color: #166534; }
+    .dark .cert-question.incorrect { background: #3b1a1a; border-color: #7f1d1d; }
+    .dark .cert-question .q-option.correct-opt { background: #0a2e1a; border-color: #166534; }
+    .dark .cert-question .q-option.incorrect-opt { background: #3b1a1a; border-color: #7f1d1d; }
+    .dark .cert-result.pass { background: #0a2e1a; border-color: #166534; }
+    .dark .cert-result.fail { background: #3b1a1a; border-color: #7f1d1d; }
+    .dark .cert-question .q-option:hover { background: #2a2a2d; }
+    .dark { --navy: #60a5fa; }
+
+    .blocker {
+      text-align: center;
+      padding: 60px 24px;
+    }
+    .blocker h2 { font-family: 'IBM Plex Serif', serif; font-size: 28px; color: var(--navy, #0F1F3D); margin-bottom: 12px; }
+    .blocker p { font-size: 16px; color: var(--text-muted); max-width: 500px; margin: 0 auto 24px; line-height: 1.6; }
+    .blocker .progress-ring {
+      width: 120px; height: 120px; border-radius: 50%;
+      border: 6px solid var(--hairline);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; font-weight: 700; color: var(--navy, #0F1F3D);
+      font-family: 'IBM Plex Mono', monospace;
+      margin: 0 auto 20px;
+      position: relative;
+    }
+    .blocker .progress-ring .fill {
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      border: 6px solid var(--primary);
+      clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0);
+      opacity: .3;
+    }
+    .blocker .btn-back {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .blocker .missed-list {
+      margin: 24px auto 0;
+      max-width: 520px;
+      text-align: left;
+    }
+    .blocker .missed-list h3 {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 16px;
+      color: var(--navy, #0F1F3D);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .blocker .missed-list a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      color: var(--text);
+      transition: background .1s;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .blocker .missed-list a:hover {
+      background: #f1f5f9;
+    }
+    .blocker .missed-list a::before {
+      content: '\2197';
+      color: var(--primary);
+      font-size: 12px;
+    }
+
+    .cert-display { display: none; margin-top: 32px; }
+    .cert-display.visible { display: block; }
+    .cert-display .cert-preview {
+      max-width: 800px;
+      margin: 0 auto 28px;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+    }
+    .cert-display .cert-preview iframe, .cert-display .cert-preview object {
+      width: 100%; height: 0; min-height: 520px;
+      border: none; display: block;
+    }
+    .cert-display .cert-actions-row {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 24px;
+    }
+    .share-section {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--hairline);
+    }
+    .share-section h3 {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 18px;
+      color: var(--navy, #0F1F3D);
+      margin-bottom: 16px;
+    }
+    .share-buttons {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+      border: none;
+      cursor: pointer;
+    }
+    .share-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
+    .share-btn.linkedin { background: #0A66C2; color: #fff; }
+    .share-btn.twitter { background: #000; color: #fff; }
+    .share-btn.facebook { background: #1877F2; color: #fff; }
+    .share-btn.copy { background: var(--bg); color: var(--text); border: 1px solid var(--border-color); }
+
+    .cert-form .inline-error { color: #dc2626; font-size: 13px; margin-top: 6px; display: none; }
+  </style>
+</head>
+<body>
+<header id="top-header">
+  <div class="header-left">
+    <a class="header-logo" href="/"><span class="header-title">MOE Documentation</span></a>
+  </div>
+  <div class="header-center"></div>
+  <div class="header-right">
+    <button id="dark-toggle" class="header-btn dark-toggle" title="Toggle dark mode">&#9790;</button>
+  </div>
+</header>
+
+<div id="app" style="min-height:calc(100vh - var(--header-height))">
+  <div id="content-area" style="max-width:100%;margin:0 auto;padding:20px 24px">
+    <div class="cert-page" id="cert-page">
+      <h1>Mainframe Open Education</h1>
+      <div class="subtitle">Certification Examination</div>
+
+      <div id="quiz-check-area"></div>
+      <div id="exam-area" style="display:none">
+        <div class="pass-info" style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:14px 20px;font-size:14px;margin-bottom:24px;display:flex;align-items:center;gap:10px">
+          &#9432; You need at least <strong>50% (5/10)</strong> correct answers to earn your certificate.
+        </div>
+        <form id="cert-form" autocomplete="off">
+          <div id="questions-container"></div>
+          <div class="cert-actions">
+            <button type="button" class="btn-primary" id="cert-submit">Submit Answers</button>
+            <button type="button" class="btn-secondary" id="cert-retake" style="display:none">Retake Exam</button>
+          </div>
+        </form>
+        <div id="cert-result" class="cert-result"></div>
+
+        <div id="cert-name-form" class="cert-form">
+          <label for="name-input">Enter your name for the certificate:</label>
+          <input type="text" id="name-input" placeholder="e.g. John Doe" maxlength="100" autocomplete="off">
+          <div class="inline-error" id="cert-upload-error">Name is required.</div>
+          <div style="margin-top:12px">
+            <button type="button" class="btn-primary" id="download-cert">Download Certificate (PDF)</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="cert-display" class="cert-display">
+        <div class="cert-preview" id="cert-preview"></div>
+        <div class="cert-actions-row">
+          <button type="button" class="btn-primary" id="download-cert-2">Download Certificate (PDF)</button>
+          <button type="button" class="btn-secondary" id="print-cert">Print Certificate</button>
+        </div>
+        <div class="share-section">
+          <h3>Share Your Achievement</h3>
+          <div class="share-buttons">
+            <a class="share-btn linkedin" id="share-linkedin" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a class="share-btn twitter" id="share-twitter" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X
+            </a>
+            <a class="share-btn facebook" id="share-facebook" target="_blank" rel="noopener">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </a>
+            <button class="share-btn copy" id="share-copy">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy Link
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COMPLETED_KEY = 'moe_completed_quizzes';
+
+function getCompletedQuizzes() {
+  try {
+    return JSON.parse(localStorage.getItem(COMPLETED_KEY) || '[]');
+  } catch { return []; }
+}
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function escapeHtml(t) {
+  const d = document.createElement('div');
+  d.textContent = t;
+  return d.innerHTML;
+}
+
+let allQuizUrls = [];
+let allQuestions = [];
+let currentQuestions = [];
+let quizzesData = null;
+let passed = false;
+let certName = '';
+let urlToTitle = {};
+
+async function loadQuizzes() {
+  try {
+    const res = await fetch('/quizzes.json');
+    if (res.ok) {
+      quizzesData = await res.json();
+      allQuizUrls = Object.keys(quizzesData);
+      for (const url of allQuizUrls) {
+        if (quizzesData[url] && quizzesData[url].questions) {
+          for (const q of quizzesData[url].questions) {
+            allQuestions.push({ ...q, sourceUrl: url });
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Failed to load quizzes:', e);
+  }
+}
+
+async function loadSitemap() {
+  try {
+    const res = await fetch('/api/sitemap');
+    if (res.ok) {
+      const tree = await res.json();
+      flattenSitemap(tree);
+    }
+  } catch (e) {
+    console.error('Failed to load sitemap:', e);
+  }
+}
+
+function flattenSitemap(nodes) {
+  for (const node of nodes) {
+    if (node.url) urlToTitle[node.url] = node.title;
+    if (node.children) flattenSitemap(node.children);
+  }
+}
+
+function getPageTitle(url) {
+  return urlToTitle[url] || url.split('/').pop().replace(/\.md$/, '').replace(/-/g, ' ');
+}
+
+function pickRandomQuestions(count) {
+  const shuffled = shuffle([...allQuestions]);
+  return shuffled.slice(0, count);
+}
+
+async function init() {
+  await Promise.all([loadQuizzes(), loadSitemap()]);
+  const completed = getCompletedQuizzes();
+
+  if (!quizzesData || allQuizUrls.length === 0) {
+    document.getElementById('quiz-check-area').innerHTML = `
+      <div class="blocker">
+        <h2>Unable to Load Quiz Data</h2>
+        <p>Failed to load quiz data. Please ensure the server is running and try again.</p>
+        <a href="/" class="btn-back">&#8592; Go Home</a>
+      </div>
+    `;
+    return;
+  }
+
+  const allDone = allQuizUrls.every(url => completed.includes(url));
+
+  if (!allDone) {
+    const missed = allQuizUrls.filter(url => !completed.includes(url));
+    showBlocker(completed.length, allQuizUrls.length, missed);
+    return;
+  }
+
+  showExamReady(allQuizUrls.length);
+}
+
+function showBlocker(completedCount, totalCount, missedUrls) {
+  const area = document.getElementById('quiz-check-area');
+  const pct = Math.round((completedCount / totalCount) * 100);
+  const listHtml = missedUrls && missedUrls.length > 0 ? `
+    <div class="missed-list">
+      <h3>Missing Quizzes (${missedUrls.length})</h3>
+      ${missedUrls.map(url => {
+        const title = getPageTitle(url);
+        return `<a href="/?goto=${encodeURIComponent(url)}" title="${escapeHtml(url)}">${escapeHtml(title)}</a>`;
+      }).join('')}
+    </div>
+  ` : '';
+  area.innerHTML = `
+    <div class="blocker">
+      <div class="progress-ring">
+        ${completedCount}/${totalCount}
+      </div>
+      <h2>Quizzes Not Complete</h2>
+      <p>You need to complete all <strong>${totalCount} knowledge check quizzes</strong> before you can attempt the certification exam.
+      You have completed <strong>${completedCount}/${totalCount}</strong> (${pct}%).</p>
+      <a href="/" class="btn-back">&#8592; Go Complete Quizzes</a>
+      ${listHtml}
+    </div>
+  `;
+}
+
+function showExamReady(totalQuizzes) {
+  document.getElementById('quiz-check-area').innerHTML = `
+    <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:10px;padding:14px 20px;font-size:14px;margin-bottom:24px;display:flex;align-items:center;gap:10px">
+      &#10003; All <strong>${totalQuizzes}</strong> knowledge check quizzes completed. You are eligible for certification.
+    </div>
+  `;
+  document.getElementById('exam-area').style.display = '';
+  renderQuestions();
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  currentQuestions = pickRandomQuestions(10);
+  container.innerHTML = currentQuestions.map((q, idx) => {
+    const isMulti = q.type === 'multi';
+    const inputType = isMulti ? 'checkbox' : 'radio';
+    const uid = idx + '_' + (q.sourceUrl || '').replace(/[^a-zA-Z0-9]/g, '_');
+    const optionsHtml = q.options.map((opt, i) => `
+      <label class="q-option">
+        <input type="${inputType}" name="${isMulti ? uid + '_' + i : uid}" value="${i}" data-index="${i}">
+        <span class="opt-text">${escapeHtml(opt)}</span>
+      </label>
+    `).join('');
+    return `
+      <div class="cert-question" data-qi="${idx}">
+        <div class="q-prompt">${escapeHtml(q.prompt)}</div>
+        <div class="q-options">${optionsHtml}</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('cert-result').className = 'cert-result';
+  document.getElementById('cert-result').innerHTML = '';
+  document.getElementById('cert-name-form').className = 'cert-form';
+  document.getElementById('cert-submit').style.display = '';
+  document.getElementById('cert-retake').style.display = 'none';
+  document.getElementById('cert-display').className = 'cert-display';
+}
+
+function gradeExam() {
+  let correct = 0;
+  const total = currentQuestions.length;
+  for (let i = 0; i < currentQuestions.length; i++) {
+    const q = currentQuestions[i];
+    const qEl = document.querySelector(`.cert-question[data-qi="${i}"]`);
+    if (!qEl) continue;
+    const inputs = qEl.querySelectorAll('input:checked');
+    const allInputs = qEl.querySelectorAll('input');
+    const selected = Array.from(inputs).map(inp => parseInt(inp.value));
+    const isCorrect = Array.isArray(q.answer)
+      ? selected.length === q.answer.length && q.answer.every(a => selected.includes(a))
+      : selected.length === 1 && selected[0] === q.answer;
+    if (isCorrect) correct++;
+    qEl.classList.add(isCorrect ? 'correct' : 'incorrect');
+    for (const inp of allInputs) {
+      inp.disabled = true;
+      const idx = parseInt(inp.value);
+      const isCorrectAnswer = Array.isArray(q.answer) ? q.answer.includes(idx) : q.answer === idx;
+      const label = inp.closest('.q-option');
+      if (isCorrectAnswer) label.classList.add('correct-opt');
+      else if (inp.checked && !isCorrectAnswer) label.classList.add('incorrect-opt');
+    }
+  }
+  const score = Math.round((correct / total) * 100);
+  passed = correct >= 5;
+  const resultEl = document.getElementById('cert-result');
+  resultEl.className = 'cert-result visible ' + (passed ? 'pass' : 'fail');
+  resultEl.innerHTML = `
+    <div class="result-score ${passed ? 'result-pass' : 'result-fail'}">${correct}/${total} (${score}%)</div>
+    <div class="result-label">${passed ? 'Congratulations! You passed the certification exam.' : 'You did not pass. Review the material and try again.'}</div>
+  `;
+  document.getElementById('cert-submit').style.display = 'none';
+  document.getElementById('cert-retake').style.display = '';
+  if (passed) {
+    document.getElementById('cert-name-form').className = 'cert-form visible';
+  }
+}
+
+function retakeExam() {
+  renderQuestions();
+}
+
+async function downloadCert() {
+  const nameInput = document.getElementById('name-input');
+  const name = nameInput.value.trim();
+  const errorEl = document.getElementById('cert-upload-error');
+  if (!name) {
+    errorEl.style.display = 'block';
+    nameInput.focus();
+    return;
+  }
+  errorEl.style.display = 'none';
+  certName = name;
+  const btns = document.querySelectorAll('#download-cert, #download-cert-2');
+  btns.forEach(b => { b.disabled = true; b.textContent = 'Generating...'; });
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 45000);
+    const res = await fetch('/api/certificate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name }),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    if (!res.ok) {
+      const err = await res.json();
+      alert('Failed to generate certificate: ' + (err.error || err.detail || 'Server error'));
+      return;
+    }
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'MOE-Certificate.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    document.getElementById('cert-name-form').className = 'cert-form';
+    showCertificateDisplay(name);
+  } catch (err) {
+    alert('Error downloading certificate: ' + err.message);
+  } finally {
+    btns.forEach(b => { b.disabled = false; b.textContent = 'Download Certificate (PDF)'; });
+  }
+}
+
+function showCertificateDisplay(name) {
+  const display = document.getElementById('cert-display');
+  display.className = 'cert-display visible';
+
+  const preview = document.getElementById('cert-preview');
+  preview.innerHTML = `
+    <div style="padding:32px 40px;text-align:center;font-family:'IBM Plex Serif',serif;background:#fff">
+      <div style="font-size:13px;letter-spacing:.3em;color:#5B6472;text-transform:uppercase;margin-bottom:10px">
+        <span style="display:inline-block;width:50px;height:1px;background:#D8DCE3;vertical-align:middle;margin-right:10px"></span>
+        The Linux Foundation
+        <span style="display:inline-block;width:50px;height:1px;background:#D8DCE3;vertical-align:middle;margin-left:10px"></span>
+      </div>
+      <div style="font-size:28px;font-weight:500;color:#0F1F3D;margin:6px 0 4px">Certificate of Completion</div>
+      <div style="font-size:11px;letter-spacing:.15em;color:#5B6472;text-transform:uppercase;margin-bottom:10px">This certifies that</div>
+      <div style="font-size:32px;font-style:italic;color:#1C2534;border-bottom:1.5px solid;border-image:linear-gradient(90deg,transparent,#2F5FD6 20%,#A9812E 80%,transparent) 1;display:inline-block;padding:0 20px 8px;margin-bottom:12px">${escapeHtml(name)}</div>
+      <div style="font-size:13px;color:#5B6472;font-family:'IBM Plex Mono',monospace;margin-bottom:8px">${new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</div>
+      <div style="font-size:13px;line-height:1.6;color:#1C2534;max-width:520px;margin:0 auto 8px">
+        has successfully completed the <b>Mainframe Open Education (MOE)</b> curriculum, demonstrating
+        applied proficiency in enterprise mainframe systems, security, resilience, and modernization.
+      </div>
+      <div style="font-size:10px;color:#5B6472;margin-top:8px;font-family:'IBM Plex Mono',monospace">MOE-CERT-${Date.now().toString(36).toUpperCase()}</div>
+    </div>
+  `;
+  setupShareButtons(name);
+}
+
+function setupShareButtons(name) {
+  const url = encodeURIComponent(window.location.origin + '/certification');
+  const text = encodeURIComponent(`I just earned my Mainframe Open Education (MOE) Certificate! 🎉`);
+  document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+  document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+  document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+  document.getElementById('share-copy').addEventListener('click', () => {
+    navigator.clipboard.writeText(window.location.origin + '/certification').then(() => {
+      const btn = document.getElementById('share-copy');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy Link'; }, 2000);
+    });
+  });
+}
+
+function applyDarkMode() {
+  const saved = localStorage.getItem('moe-dark-mode');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = saved ? saved === 'dark' : prefersDark;
+  if (isDark) document.documentElement.classList.add('dark');
+}
+
+document.getElementById('dark-toggle').addEventListener('click', () => {
+  const html = document.documentElement;
+  const isDark = html.classList.toggle('dark');
+  localStorage.setItem('moe-dark-mode', isDark ? 'dark' : 'light');
+});
+
+document.getElementById('cert-submit').addEventListener('click', gradeExam);
+document.getElementById('cert-retake').addEventListener('click', retakeExam);
+document.getElementById('download-cert').addEventListener('click', downloadCert);
+document.getElementById('download-cert-2').addEventListener('click', () => {
+  const nameInput = document.getElementById('name-input');
+  if (nameInput && nameInput.value.trim()) {
+    downloadCert();
+  } else {
+    document.getElementById('cert-name-form').className = 'cert-form visible';
+    document.getElementById('name-input').focus();
+  }
+});
+document.getElementById('print-cert').addEventListener('click', () => {
+  const preview = document.getElementById('cert-preview');
+  const win = window.open('', '_blank');
+  if (win) {
+    win.document.write('<html><head><title>Certificate - MOE</title><style>body{margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#fff}*{box-sizing:border-box}</style></head><body>');
+    win.document.write(preview.innerHTML);
+    win.document.write('</body></html>');
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 500);
+  }
+});
+
+applyDarkMode();
+init();
+</script>
+</body>
+</html>
