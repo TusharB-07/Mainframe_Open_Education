@@ -948,14 +948,175 @@ async function dismissJourney(targetUrl) {
   if (header) header.style.display = 'flex';
 }
 
-
+/* ── Init ── */
 async function init() {
   try {
+    const welcomeEl = document.querySelector('.welcome');
+    if (welcomeEl) welcomeHtml = welcomeEl.outerHTML;
+
     sitemapData = await fetchSitemap();
     buildNavTree(sitemapData, document.getElementById('nav-tree'));
+    await loadQuizzes();
+    totalQuizzes = Object.keys(quizzesData).length;
+    applyDarkMode();
+    updateProgressUI();
+    updateSidebarCheckmarks();
+
+    document.getElementById('dark-toggle').addEventListener('click', toggleDarkMode);
+    document.getElementById('sandbox-btn').addEventListener('click', () => setViewMode('sandbox'));
+
+    /* Font size controls */
+    document.getElementById('font-dec')?.addEventListener('click', () => changeFontSize(-1));
+    document.getElementById('font-inc')?.addEventListener('click', () => changeFontSize(1));
+    applyFontSize();
+
     document.getElementById('splash')?.addEventListener('click', dismissSplash);
+
     setupJourneyMap();
+
     document.getElementById('journey-start')?.addEventListener('click', () => dismissJourney());
-  } catch(e) { console.error(e); }
+
+    document.getElementById('page-content').addEventListener('click', (e) => {
+      const navLink = e.target.closest('.page-nav-link');
+      if (navLink) {
+        e.preventDefault();
+        const url = navLink.dataset.url;
+        const node = findNodeByUrl(sitemapData, url);
+        if (node) loadPage(node);
+        return;
+      }
+      const card = e.target.closest('.welcome-card');
+      if (card && card.getAttribute('href') && card.getAttribute('href') !== '#') {
+        e.preventDefault();
+        const url = card.getAttribute('href');
+        const node = findNodeByUrl(sitemapData, url);
+        if (node) loadPage(node);
+      }
+    });
+
+    document.getElementById('search-input').addEventListener('input', (e) => {
+      performSearch(e.target.value);
+    });
+
+    document.getElementById('sidebar-toggle').addEventListener('click', toggleSidebar);
+
+    document.getElementById('page-toc').addEventListener('click', (e) => {
+      const item = e.target.closest('.toc-item');
+      if (item) {
+        e.preventDefault();
+        const id = item.dataset.tocId;
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => setViewMode(btn.dataset.mode));
+    });
+
+    document.getElementById('sandbox-run').addEventListener('click', runSandboxCode);
+
+    document.getElementById('sandbox-editor').addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        runSandboxCode();
+      }
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const start = e.target.selectionStart;
+        const end = e.target.selectionEnd;
+        e.target.value = e.target.value.substring(0, start) + '  ' + e.target.value.substring(end);
+        e.target.selectionStart = e.target.selectionEnd = start + 2;
+      }
+    });
+
+    /* Quiz keyboard navigation */
+    document.getElementById('page-content').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const quizSubmit = e.target.closest('.quiz-form')?.querySelector('.quiz-submit');
+        if (quizSubmit && quizSubmit.style.display !== 'none') {
+          const option = e.target.closest('.quiz-option');
+          if (option && option.querySelector('input')) {
+            return;
+          }
+        }
+      }
+    });
+
+    let scrollTimeout;
+    document.getElementById('page-content').addEventListener('scroll', () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(setupTocScrollTracking, 200);
+    }, { passive: true });
+
+    const pageContent = document.getElementById('page-content');
+    const tocObserver = new MutationObserver(() => {
+      setupTocScrollTracking();
+    });
+    tocObserver.observe(pageContent, { childList: true, subtree: true });
+
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        const sidebar = document.getElementById('sidebar');
+        const toggle = document.getElementById('sidebar-toggle');
+        if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+          closeSidebar();
+        }
+      }
+    });
+
+    /* Command palette */
+    const cmdPalette = document.getElementById('cmd-palette');
+    const cmdInput = document.getElementById('cmd-input');
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        if (cmdPalette.classList.contains('open')) {
+          closeCommandPalette();
+        } else {
+          openCommandPalette();
+        }
+      }
+      if (e.key === 'Escape' && cmdPalette.classList.contains('open')) {
+        closeCommandPalette();
+      }
+    });
+
+    cmdInput?.addEventListener('input', (e) => filterCommandPalette(e.target.value));
+
+    cmdInput?.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown') { e.preventDefault(); navigateCommandPalette(1); }
+      if (e.key === 'ArrowUp') { e.preventDefault(); navigateCommandPalette(-1); }
+      if (e.key === 'Enter') { e.preventDefault(); commitCommandPalette(); }
+    });
+
+    cmdPalette?.addEventListener('click', (e) => {
+      if (e.target === cmdPalette) closeCommandPalette();
+    });
+
+    /* Prefetch sidebar links */
+    setupPrefetch();
+
+    /* Navigate to a specific page if ?goto= param is present */
+    const params = new URLSearchParams(window.location.search);
+    const gotoUrl = params.get('goto');
+    if (gotoUrl) {
+      const node = findNodeByUrl(sitemapData, gotoUrl);
+      if (node) {
+        const splash = document.getElementById('splash');
+        const journey = document.getElementById('journey');
+        if (splash) { splash.style.display = 'none'; splash.classList.add('dismissed'); }
+        if (journey) { journey.style.display = 'none'; journey.classList.add('dismissed'); }
+        setTimeout(() => loadPage(node), 100);
+      }
+    }
+
+  } catch (err) {
+    console.error('Failed to initialize:', err);
+    document.getElementById('page-content').innerHTML =
+      `<div class="error">Failed to load sitemap. Make sure the server is running.</div>`;
+  }
 }
-init();
+
+document.addEventListener('DOMContentLoaded', init);
