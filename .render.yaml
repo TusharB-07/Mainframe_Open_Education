@@ -7,6 +7,6 @@ services:
       - key: NODE_ENV
         value: production
       - key: PISTON_URL
-        value: https://piston.mantic.markets
+        value: https://emkc.org/api/v2/piston
       - key: PUPPETEER_EXECUTABLE_PATH
         value: /usr/bin/chromium
