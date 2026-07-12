@@ -14,13 +14,13 @@ RUN apt-get update && \
 WORKDIR /app
 
 COPY package*.json ./
+ENV PUPPETEER_SKIP_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 RUN npm install --omit=dev
 
 COPY . .
 
-ENV PUPPETEER_SKIP_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium \
-    NODE_ENV=production
+ENV NODE_ENV=production
 
 EXPOSE 3000
 
