@@ -668,7 +668,7 @@ app.get('/api/llms', async (req, res) => {
   }
 });
 
-const SANDBOX_BASE_URL = process.env.SANDBOX_URL || 'http://localhost:4000';
+const SANDBOX_BASE_URL = process.env.SANDBOX_URL || 'https://mainframesandbox-production.up.railway.app';
 
 app.post('/api/sandbox/execute', async (req, res) => {
   const { language, code, stdin } = req.body;
