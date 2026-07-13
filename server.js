@@ -668,12 +668,7 @@ app.get('/api/llms', async (req, res) => {
   }
 });
 
-const PISTON_BASE_URL = process.env.PISTON_URL || 'https://emkc.org/api/v2/piston';
-
-function extensionFor(language) {
-  const map = { cobol: 'cob', python: 'py', javascript: 'js' };
-  return map[language] || 'txt';
-}
+const SANDBOX_BASE_URL = process.env.SANDBOX_URL || 'http://localhost:4000';
 
 app.post('/api/sandbox/execute', async (req, res) => {
   const { language, code, stdin } = req.body;
@@ -681,20 +676,10 @@ app.post('/api/sandbox/execute', async (req, res) => {
     return res.status(400).json({ error: 'language and code are required' });
   }
   try {
-    const response = await fetch(`${PISTON_BASE_URL}/execute`, {
+    const response = await fetch(`${SANDBOX_BASE_URL}/execute`, {
       method: 'POST',
-      headers: Object.assign(
-        { 'Content-Type': 'application/json' },
-        process.env.PISTON_AUTH_KEY ? { 'Authorization': process.env.PISTON_AUTH_KEY } : {}
-      ),
-      body: JSON.stringify({
-        language,
-        version: '*',
-        files: [{ name: `main.${extensionFor(language)}`, content: code }],
-        stdin: stdin || '',
-        run_timeout: 3000,
-        compile_timeout: 3000
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ language, code, stdin: stdin || '' })
     });
     const result = await response.json();
     if (!response.ok) return res.status(response.status).json(result);

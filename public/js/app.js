@@ -765,7 +765,7 @@ async function runSandboxCode() {
     setSandboxOutput(html);
   } catch (err) {
     if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
-      setSandboxOutput('<span class="output-error">Piston sandbox is not reachable. Make sure the Piston container is running on port 2000.</span>');
+      setSandboxOutput('<span class="output-error">Sandbox is not reachable. Make sure the GnuCOBOL sandbox is running on port 4000.</span>');
     } else if (err.name === 'AbortError' || err.message.includes('timeout')) {
       setSandboxOutput('<span class="output-error">Execution timed out. The code may contain an infinite loop or long-running operation.</span>');
     } else {
@@ -840,7 +840,7 @@ function addInlineSandbox(contentEl, contentText) {
       output.innerHTML = html;
     } catch (err) {
       if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
-        output.innerHTML = '<span class="output-error">Sandbox not reachable. Make sure Piston is running on port 2000.</span>';
+        output.innerHTML = '<span class="output-error">Sandbox not reachable. Make sure the GnuCOBOL sandbox is running on port 4000.</span>';
       } else {
         output.innerHTML = '<span class="output-error">Error: ' + escapeHtml(err.message) + '</span>';
       }
